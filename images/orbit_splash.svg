@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="bgA" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f1438"/>
+      <stop offset="100%" stop-color="#3d2a6b"/>
+    </linearGradient>
+    <radialGradient id="sunA" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff5e0"/>
+      <stop offset="50%" stop-color="#ffc88a"/>
+      <stop offset="100%" stop-color="#d94f30" stop-opacity="0.85"/>
+    </radialGradient>
+  </defs>
+  <rect width="200" height="200" fill="url(#bgA)"/>
+  <g transform="translate(100, 100)">
+    <ellipse cx="0" cy="0" rx="78" ry="78" fill="none" stroke="rgba(201, 168, 255, 0.15)" stroke-width="1" stroke-dasharray="2 3"/>
+    <ellipse cx="0" cy="0" rx="54" ry="54" fill="none" stroke="rgba(201, 168, 255, 0.28)" stroke-width="1"/>
+    <ellipse cx="0" cy="0" rx="30" ry="30" fill="none" stroke="rgba(201, 168, 255, 0.42)" stroke-width="1"/>
+    <circle cx="0" cy="0" r="11" fill="url(#sunA)"/>
+    <circle cx="30" cy="0" r="6" fill="#c8a8ff"/>
+    <circle cx="-22" cy="-22" r="6" fill="#ffb5c8"/>
+    <circle cx="42" cy="-36" r="6" fill="#a8d4ff"/>
+    <circle cx="-54" cy="0" r="6" fill="#a8e8c4"/>
+    <circle cx="0" cy="78" r="5" fill="#ffd28a"/>
+    <circle cx="-55" cy="-55" r="5" fill="#ff9bb5"/>
+  </g>
+</svg>

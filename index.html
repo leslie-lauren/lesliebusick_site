@@ -282,9 +282,12 @@
     color: inherit;
     cursor: pointer;
     align-items: start;
-    transition: transform 0.3s ease;
+    padding: 14px;
+    margin: -14px;
+    border-radius: 20px;
+    transition: transform 0.3s ease, background 0.3s ease;
   }
-  .proj-item:hover { transform: translateX(4px); }
+  .proj-item:hover { transform: translateX(4px); background: rgba(160, 44, 44, 0.05); }
   .proj-thumb {
     width: 96px; height: 96px;
     border-radius: 22px;
@@ -293,10 +296,6 @@
     background: var(--bg-2);
     flex-shrink: 0;
     transition: all 0.3s ease;
-  }
-  .proj-item:hover .proj-thumb {
-    border-color: var(--ink);
-    box-shadow: 0 12px 24px -8px rgba(60, 40, 20, 0.18);
   }
   .proj-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .proj-content { padding-top: 4px; }

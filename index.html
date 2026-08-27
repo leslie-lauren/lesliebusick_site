@@ -269,15 +269,15 @@
   .projects-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 48px 80px;
+    gap: 34px 64px;
   }
   @media (min-width: 720px) {
     .projects-grid { grid-template-columns: 1fr 1fr; }
   }
   .proj-item {
     display: grid;
-    grid-template-columns: 96px 1fr;
-    gap: 24px;
+    grid-template-columns: 64px 1fr;
+    gap: 18px;
     text-decoration: none;
     color: inherit;
     cursor: pointer;
@@ -289,8 +289,8 @@
   }
   .proj-item:hover { transform: translateX(4px); background: rgba(160, 44, 44, 0.05); }
   .proj-thumb {
-    width: 96px; height: 96px;
-    border-radius: 22px;
+    width: 64px; height: 64px;
+    border-radius: 16px;
     overflow: hidden;
     border: 1px solid var(--rule);
     background: var(--bg-2);

@@ -22,759 +22,483 @@
 <meta name="twitter:description" content="2x founder, operator, advisor, and just trying to be useful where I can!">
 <meta name="twitter:image" content="https://lesliebusick.com/og-image.png">
 
+<meta name="theme-color" content="#dcd9f7">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #faf6ee;
-    --bg-2: #f2ecdd;
-    --bg-card: #fffdf8;
-    --ink: #1c2333;
-    --ink-soft: #3a4050;
-    --ink-faded: #6b707e;
-    --muted: #8a8780;
-    --dim: #b9b5aa;
-    --rule: #e8e1d0;
-    --rule-soft: #f0eadb;
-    --accent: #a02c2c;
-    --accent-deep: #7d2020;
-    --dark: #0d0d0d;
-    --display: 'Playfair Display', Georgia, serif;
-    --serif: 'Spectral', Georgia, serif;
-    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  :root{
+    --page:#dcd9f7; --pane:#eeecfd; --bar:#cfcbf6; --ink:#1c1a4e; --line:#2a2865;
+    --hi:#6b64ee; --note:#f5f3c9; --paper:#f9f8ff; --mint:#cdeee3; --pink:#f7d6ea;
+    --mono:"Space Mono",ui-monospace,"Courier New",monospace;
+    --pix:"VT323","Space Mono",ui-monospace,monospace;
+    --shadow:6px 6px 0 var(--line);
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg); color: var(--ink);
-    font-family: var(--sans); overflow-x: hidden; line-height: 1.5;
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    /* no scroll: the first copy of the strip sits still and the duplicate is clipped */
+    .marquee__track{transform:none}
   }
-  body::before {
-    content: ''; position: fixed; inset: 0;
-    background-image:
-      radial-gradient(circle at 25% 30%, rgba(160, 44, 44, 0.04), transparent 50%),
-      radial-gradient(circle at 75% 70%, rgba(160, 44, 44, 0.03), transparent 50%),
-      radial-gradient(circle at 1px 1px, rgba(60, 40, 20, 0.025) 1px, transparent 0);
-    background-size: auto, auto, 4px 4px;
-    pointer-events: none; z-index: 0;
+  body{
+    margin:0;background:var(--page);color:var(--ink);
+    font-family:var(--mono);font-size:14px;line-height:1.6;
+    background-image:radial-gradient(rgba(28,26,78,.12) .8px,transparent .9px);
+    background-size:14px 14px;
+    -webkit-font-smoothing:antialiased;
   }
+  a{color:var(--hi);text-decoration:none}
+  a:hover{text-decoration:underline}
+  :focus-visible{outline:3px solid var(--hi);outline-offset:2px}
+  h2{font-family:var(--pix);font-size:38px;font-weight:400;line-height:1;margin:0 0 18px;display:flex;align-items:center;gap:12px}
+  h2 svg{width:26px;height:26px;flex:none}
+  p{margin:0 0 12px}
+  svg.px{shape-rendering:crispEdges}
+  img{max-width:100%}
 
-  /* Nav */
-  header.site-nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(250, 246, 238, 0.85);
-    backdrop-filter: blur(18px) saturate(180%);
-    -webkit-backdrop-filter: blur(18px) saturate(180%);
-    border-bottom: 1px solid var(--rule);
-  }
-  .nav-inner { max-width: 1180px; margin: 0 auto; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
-  .nav-brand { font-family: var(--display); font-size: 17px; font-weight: 500; letter-spacing: -0.01em; color: var(--ink); text-decoration: none; }
-  .nav-brand em { font-style: italic; color: var(--accent); }
-  .nav-links { display: flex; gap: 22px; font-family: var(--sans); font-size: 10.5px; letter-spacing: 0.18em; text-transform: lowercase; }
-  .nav-links a { color: var(--ink-faded); text-decoration: none; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--accent); }
+  /* browser frame */
+  .browser{max-width:1040px;margin:28px auto 60px;border:2px solid var(--line);background:var(--pane);box-shadow:var(--shadow)}
+  .browser__bar{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:8px 12px;background:var(--bar);border-bottom:2px solid var(--line)}
+  .lights{display:flex;gap:6px}
+  .lights i{width:11px;height:11px;border:1.5px solid var(--line);background:var(--paper)}
+  .browser__url{text-align:center;font-size:12px}
+  .cursor{display:inline-block;width:.6ch;background:var(--ink);height:1em;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  nav.tabs{display:flex;align-items:center;gap:18px;padding:10px 20px;border-bottom:2px solid var(--line);background:var(--pane);font-size:13px;overflow-x:auto;position:sticky;top:0;z-index:5}
+  nav.tabs .plus{opacity:.6}
+  nav.tabs a{color:var(--ink);padding:1px 6px;white-space:nowrap}
+  nav.tabs a.on,nav.tabs a:hover{background:var(--hi);color:#fff;text-decoration:none}
 
-  /* Hamburger */
-  .nav-toggle {
-    display: none; background: transparent; border: 0; padding: 8px;
-    cursor: pointer; width: 40px; height: 40px;
-    align-items: center; justify-content: center;
-    margin: -8px -8px -8px 0;
-  }
-  .nav-toggle-bars { position: relative; width: 22px; height: 14px; }
-  .nav-toggle-bars span {
-    position: absolute; left: 0; width: 100%; height: 1.5px;
-    background: var(--ink); border-radius: 2px;
-    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s, top 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .nav-toggle-bars span:nth-child(1) { top: 0; }
-  .nav-toggle-bars span:nth-child(2) { top: 6.25px; }
-  .nav-toggle-bars span:nth-child(3) { top: 12.5px; }
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(1) { top: 6.25px; transform: rotate(45deg); }
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(2) { opacity: 0; }
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(3) { top: 6.25px; transform: rotate(-45deg); }
+  /* windows */
+  .win{border:2px solid var(--line);background:var(--paper);box-shadow:var(--shadow)}
+  .win__bar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 10px;background:var(--bar);border-bottom:2px solid var(--line);font-size:13px}
+  .win__ctl{display:flex;gap:4px;flex:none}
+  .win__ctl i{position:relative;width:12px;height:12px;border:1.5px solid var(--line);background:var(--paper);font-style:normal}
+  .win__ctl i.min::before{content:"";position:absolute;left:1px;right:1px;bottom:1px;height:1.5px;background:var(--line)}
+  .win__ctl i.max::before{content:"";position:absolute;inset:1.5px;border:1.5px solid var(--line)}
+  .win__ctl i.close::before,.win__ctl i.close::after{content:"";position:absolute;left:0;right:0;top:4px;height:1.5px;background:var(--line)}
+  .win__ctl i.close::before{transform:rotate(45deg)}
+  .win__ctl i.close::after{transform:rotate(-45deg)}
+  .win__body{padding:18px}
+  section{padding:40px 28px;border-bottom:2px dashed var(--line);position:relative}
+  .pnum{font-size:11px;opacity:.65;text-align:right;margin-top:22px}
+  .btn{display:inline-block;border:2px solid var(--line);background:var(--paper);padding:8px 14px;color:var(--ink);box-shadow:3px 3px 0 var(--line);font-size:13px}
+  .btn:hover{text-decoration:none;background:var(--pane)}
+  .btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--line)}
+  .btn.fill{background:var(--hi);color:#fff}
+  .btn.fill:hover{background:var(--ink)}
 
-  @media (max-width: 720px) {
-    .nav-toggle { display: inline-flex; }
-    .nav-links {
-      position: absolute; top: 100%; left: 0; right: 0;
-      flex-direction: column; gap: 0;
-      background: rgba(250, 246, 238, 0.96);
-      backdrop-filter: blur(18px) saturate(180%);
-      -webkit-backdrop-filter: blur(18px) saturate(180%);
-      border-bottom: 1px solid var(--rule);
-      padding: 8px 24px 18px;
-      font-size: 11px; letter-spacing: 0.18em;
-      max-height: 0; overflow: hidden;
-      transition: max-height 0.35s cubic-bezier(0.22, 1, 0.36, 1), padding 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-      padding-top: 0; padding-bottom: 0;
-    }
-    .nav-links.open { max-height: 320px; padding-top: 8px; padding-bottom: 18px; }
-    .nav-links a { padding: 12px 0; border-bottom: 1px solid var(--rule-soft); }
-    .nav-links a:last-child { border-bottom: 0; }
-  }
+  /* hero */
+  .hero{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:center;padding:52px 28px 40px;border-bottom:2px dashed var(--line)}
+  .eyebrow{font-size:12px;margin-bottom:14px;opacity:.8;letter-spacing:.06em}
+  h1{font-family:var(--pix);font-size:clamp(66px,9vw,108px);line-height:.86;margin:0 0 18px;letter-spacing:-.01em}
+  h1 .spark{display:inline-block;width:.34em;height:.34em;color:var(--hi);vertical-align:.22em;margin-left:14px;animation:twinkle 2.4s ease-in-out infinite}
+  @keyframes twinkle{50%{transform:scale(.7) rotate(20deg);opacity:.6}}
+  .tag{font-size:15px;max-width:34ch;margin-bottom:26px}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:12px}
+  .photo .win__body{padding:0;background:#c9c4f0;position:relative}
+  .photo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 30%}
+  .photo .scroll{position:absolute;right:0;top:0;bottom:0;width:16px;background:var(--pane);border-left:2px solid var(--line);display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:4px 0}
+  .photo .scroll i{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent}
+  .photo .scroll i.up{border-bottom:6px solid var(--line)}
+  .photo .scroll i.down{border-top:6px solid var(--line)}
 
-  /* Hero */
-  .hero { position: relative; z-index: 1; padding: 70px 24px 80px; max-width: 1180px; margin: 0 auto; }
-  @media (min-width: 720px) { .hero { padding: 110px 48px 80px; } }
-  .hero-eyebrow {
-    font-family: var(--sans); font-size: 10.5px; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 28px;
-    opacity: 0; animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
-  }
-  .hero h1 {
-    font-family: var(--display); font-size: clamp(52px, 12vw, 120px);
-    font-weight: 400; line-height: 1.02; letter-spacing: -0.02em;
-    margin-bottom: 36px; color: var(--ink);
-    opacity: 0; animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.55s forwards;
-  }
-  .hero h1 .wave { display: inline-block; transform-origin: 70% 70%; animation: wave 2.6s ease-in-out 1.5s infinite; }
-  @keyframes wave {
-    0%, 60%, 100% { transform: rotate(0deg); }
-    10% { transform: rotate(14deg); } 20% { transform: rotate(-8deg); }
-    30% { transform: rotate(14deg); } 40% { transform: rotate(-4deg); } 50% { transform: rotate(10deg); }
-  }
-  .hero h1 .name-i { font-style: italic; color: var(--accent); }
-  .hero-bio { max-width: 700px; opacity: 0; animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.7s forwards; }
-  .hero-bio p { font-family: var(--serif); font-size: clamp(22px, 2.8vw, 28px); line-height: 1.45; color: var(--ink-soft); max-width: 640px; }
-  .hero-bio em { font-style: italic; color: var(--accent); }
-  .hero-cta { margin-top: 40px; display: flex; gap: 12px; flex-wrap: wrap; opacity: 0; animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 14px 22px; border-radius: 100px;
-    font-family: var(--sans); font-size: 11.5px; font-weight: 600;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    text-decoration: none; cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-    border: 1px solid var(--ink);
-  }
-  .btn.primary { background: var(--ink); color: var(--bg); }
-  .btn.primary:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
-  .btn.ghost { background: transparent; color: var(--ink); }
-  .btn.ghost:hover { background: var(--ink); color: var(--bg); transform: translateY(-2px); }
-  .btn .arr { font-family: var(--serif); font-size: 14px; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  /* about */
+  .about{display:grid;grid-template-columns:1.3fr 1fr;gap:26px;align-items:start}
+  .about .lbl{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--hi)}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .stat{border:2px solid var(--line);background:var(--paper);padding:14px 12px 10px;text-align:center}
+  .stat b{font-family:var(--pix);font-size:44px;line-height:.9;display:block;color:var(--hi)}
+  .stat span{font-size:11px}
 
-  /* Section base */
-  section { position: relative; z-index: 1; padding: 80px 24px; max-width: 1180px; margin: 0 auto; }
-  @media (min-width: 720px) { section { padding: 100px 48px; } }
-  .sec-head { margin-bottom: 56px; max-width: 760px; }
-  .sec-head h2 { font-family: var(--display); font-size: clamp(40px, 7vw, 64px); font-weight: 400; line-height: 1; letter-spacing: -0.025em; color: var(--ink); }
-  .sec-head h2 em { font-style: italic; color: var(--accent); }
-  .sec-head p { margin-top: 18px; font-family: var(--serif); font-size: clamp(17px, 2vw, 20px); line-height: 1.5; color: var(--ink-soft); max-width: 580px; }
-  .sec-head p em { font-style: italic; }
+  /* career */
+  .job{display:grid;grid-template-columns:120px 1fr;gap:18px;padding:16px 0;border-bottom:1.5px dashed var(--line)}
+  .job:last-child{border:0;padding-bottom:0}
+  .job .yr{font-size:12px;opacity:.75}
+  .job h3{margin:0 0 4px;font-size:15px}
+  .job h3 small{font-weight:400;opacity:.75;margin-left:8px}
+  .job ul{margin:6px 0 0 16px;padding:0}
+  .job li{margin-bottom:2px}
 
-  /* About */
-  .about-section { display: grid; grid-template-columns: 1fr; gap: 36px; align-items: start; }
-  @media (min-width: 760px) { .about-section { grid-template-columns: 260px 1fr; gap: 56px; } }
-  .photo-wrap { position: relative; }
-  .photo {
-    width: 100%; max-width: 260px; aspect-ratio: 1 / 1;
-    border-radius: 4px; overflow: hidden; background: var(--bg-2);
-    box-shadow: 0 1px 0 var(--rule), 0 24px 48px -16px rgba(60, 40, 20, 0.18);
-    position: relative;
-  }
-  .photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
-  .photo-tape {
-    position: absolute; top: -10px; left: 50%;
-    transform: translateX(-50%) rotate(-2deg);
-    width: 80px; height: 22px;
-    background: rgba(216, 152, 144, 0.4);
-    border: 1px solid rgba(160, 44, 44, 0.18); z-index: 2;
-  }
-  .about-content .label {
-    display: inline-block; font-family: var(--sans); font-size: 10px;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--accent); margin-right: 8px;
-    font-weight: 600; font-style: normal;
-  }
-  .about-content .body-line { font-family: var(--serif); font-size: clamp(17px, 2vw, 20px); line-height: 1.55; color: var(--ink-soft); margin-bottom: 18px; }
-  .about-content .body-line:last-of-type { margin-bottom: 0; }
-  .about-content em { font-style: italic; }
-  .about-content strong { font-weight: 600; color: var(--ink); }
-  .about-content .accent { color: var(--accent); font-style: italic; }
+  /* advising */
+  .adv{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
+  .adv .win{display:flex;flex-direction:column}
+  .adv .win__body{padding:14px;flex:1;display:flex;flex-direction:column}
+  .adv .ico{width:48px;height:48px;margin-bottom:10px}
+  .adv h3{margin:0 0 6px;font-size:14px}
+  .adv p{font-size:12.5px}
+  .adv .role{font-size:12px;background:var(--note);border:1.5px solid var(--line);padding:6px 8px;margin-top:auto}
 
-  /* Stat strip - sits below About now */
-  .stat-strip {
-    margin: 60px 0 0;
-    padding: 36px 0;
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 16px;
-  }
-  @media (min-width: 720px) { .stat-strip { grid-template-columns: repeat(4, 1fr); padding: 44px 0; gap: 32px; margin-top: 80px; } }
-  .stat-item .stat-num { font-family: var(--display); font-size: clamp(32px, 4.5vw, 42px); font-weight: 400; line-height: 1; letter-spacing: -0.025em; color: var(--ink); }
-  .stat-item .stat-num em { font-style: italic; color: var(--accent); }
-  .stat-item .stat-label { margin-top: 10px; font-family: var(--sans); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  /* projects */
+  .proj{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .pcard{border:2px solid var(--line);background:var(--paper);padding:16px 14px;display:flex;flex-direction:column;gap:8px;color:var(--ink);box-shadow:3px 3px 0 var(--line)}
+  .pcard:hover{background:var(--pane);text-decoration:none;transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--line)}
+  .pcard .top{display:flex;align-items:center;gap:12px}
+  .pcard .icon{width:56px;height:56px;border:2px solid var(--line);background:var(--pane);flex:none;overflow:hidden;position:relative}
+  .pcard .icon img{width:100%;height:100%;object-fit:cover;display:block}
+  .pcard .icon img.err{display:none}
+  .pcard .icon .fb{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-family:var(--pix);font-size:30px;color:var(--hi)}
+  .pcard .icon img.err+.fb{display:flex}
+  .pcard h3{margin:0;font-size:15px}
+  .pcard .pill{font-size:10px;border:1.5px solid var(--line);padding:0 6px;display:inline-block;margin-left:6px;vertical-align:middle;background:var(--mint)}
+  .pcard .pill.beta{background:var(--pink)}
+  .pcard .pill.oss{background:var(--note)}
+  .pcard p{font-size:12.5px;margin:0;flex:1}
+  .pcard .go{font-size:12px;color:var(--hi)}
 
-  /* Career (DARK) */
-  .career-section { background: var(--dark); color: var(--bg); max-width: none; padding: 80px 24px; margin: 0; }
-  @media (min-width: 720px) { .career-section { padding: 120px 48px; } }
-  .career-inner { max-width: 1080px; margin: 0 auto; }
-  .career-section .sec-head h2 { color: var(--bg); }
-  .career-section .sec-head h2 em { color: var(--accent); }
-  .career-row { padding: 32px 0; border-top: 1px solid rgba(255,255,255,0.1); display: grid; grid-template-columns: 1fr; gap: 20px; }
-  @media (min-width: 720px) { .career-row { grid-template-columns: 220px 1fr; gap: 48px; padding: 40px 0; } }
-  .career-row:last-child { border-bottom: 1px solid rgba(255,255,255,0.1); }
-  .career-meta { display: flex; flex-direction: column; gap: 6px; }
-  .career-meta .yr { font-family: var(--sans); font-size: 10.5px; letter-spacing: 0.2em; color: rgba(250, 246, 238, 0.55); text-transform: uppercase; }
-  .career-name h3 { font-family: var(--display); font-size: clamp(28px, 4vw, 38px); font-weight: 500; line-height: 1; letter-spacing: -0.02em; margin-bottom: 6px; }
-  .career-name h3 em { font-style: italic; color: var(--accent); }
-  .career-name .role { font-family: var(--sans); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(250, 246, 238, 0.6); margin-bottom: 18px; }
-  .career-name .desc { font-family: var(--serif); font-size: clamp(16px, 1.8vw, 18px); line-height: 1.55; color: rgba(250, 246, 238, 0.85); margin-bottom: 18px; }
-  .career-bullets { list-style: none; margin-top: 14px; }
-  .career-bullets li { font-family: var(--serif); font-size: 15.5px; line-height: 1.5; color: rgba(250, 246, 238, 0.8); padding: 6px 0 6px 24px; position: relative; }
-  .career-bullets li::before { content: '·'; position: absolute; left: 2px; top: 1px; color: var(--accent); font-size: 30px; line-height: 1; }
-  .before-line { font-family: var(--serif); font-size: 18px; line-height: 1.5; color: rgba(250, 246, 238, 0.85); }
-  .before-line strong { color: var(--bg); font-weight: 600; }
-  .before-line em { font-style: italic; }
+  /* writing + loves */
+  .two{display:grid;grid-template-columns:1.2fr 1fr;gap:26px;align-items:start}
+  .essay{display:block;padding:12px 4px;border-bottom:1.5px solid var(--bar);color:var(--ink)}
+  .essay:last-of-type{border-bottom:0}
+  .essay:hover{background:var(--pane);text-decoration:none}
+  .essay b{display:block;font-size:13.5px}
+  .essay small{font-size:11px;color:var(--hi)}
+  .note{background:var(--note);position:relative;transform:rotate(-.6deg);margin-top:16px}
+  .note::before{content:"";position:absolute;top:-16px;left:50%;width:26px;height:26px;background:var(--bar);border:2px solid var(--line);transform:translateX(-50%) rotate(-6deg)}
+  .note .win__bar{background:transparent;border-color:rgba(28,26,78,.25)}
+  .loves{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+  .loves li{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start}
+  .loves svg{width:26px;height:26px;margin-top:1px}
+  .loves b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  .loves span{font-size:12.5px}
 
-  /* Advising */
-  .advising-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-  @media (min-width: 760px) { .advising-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
-  .adv-card {
-    background: var(--bg-card); border: 1px solid var(--rule);
-    border-radius: 20px; padding: 28px;
-    display: flex; flex-direction: column;
-    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .adv-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 24px 48px -16px rgba(60, 40, 20, 0.18); }
-  .adv-cat {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 9px 18px; background: var(--bg-2);
-    border-radius: 100px; font-family: var(--sans);
-    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--ink-soft); font-weight: 600;
-    width: fit-content; margin-bottom: 20px;
-  }
-  .adv-cat .emoji {
-    font-size: 18px;
-    line-height: 1;
-    display: inline-flex;
-    align-items: center;
-  }
-  .adv-card p { font-family: var(--serif); font-size: 16px; line-height: 1.55; color: var(--ink-soft); margin-bottom: 16px; }
-  .adv-card p em { font-style: italic; }
-  .adv-card .my-role {
-    margin-top: auto; padding-top: 18px;
-    border-top: 1px solid var(--rule);
-    font-family: var(--sans); font-size: 10px;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--muted); line-height: 1.7;
-  }
-  .adv-card .my-role strong { color: var(--ink); font-weight: 600; }
+  /* contact */
+  .contact{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+  .socials{display:flex;gap:10px;flex-wrap:wrap}
+  .footer{padding:18px 28px;font-size:11px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--bar);border-top:2px solid var(--line)}
+  .marquee{overflow:hidden;border-bottom:2px solid var(--line);background:var(--ink);color:var(--pane);font-family:var(--pix);font-size:22px;padding:4px 0}
+  .marquee__track{display:flex;width:max-content;animation:scroll 34s linear infinite}
+  .marquee__track>span{white-space:nowrap;flex:none}
+  .marquee svg{width:14px;height:14px;vertical-align:-1px;margin:0 10px;color:#8f88ff}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .deco{position:absolute;opacity:.9}
 
-  /* Projects */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 34px 64px;
+  @media (max-width:820px){.adv,.proj{grid-template-columns:1fr 1fr}}
+  @media (max-width:640px){
+    .browser{margin:12px}
+    .hero,.about,.two,.contact,.adv,.proj{grid-template-columns:1fr}
+    section,.hero{padding:26px 16px}
+    .job{grid-template-columns:1fr;gap:4px}
+    h1{font-size:64px}
+    h2{font-size:32px}
+    .note{transform:none;margin-top:30px}
+    .deco{display:none}
+    .contact{justify-items:start}
   }
-  @media (min-width: 720px) {
-    .projects-grid { grid-template-columns: 1fr 1fr; }
-  }
-  .proj-item {
-    display: grid;
-    grid-template-columns: 64px 1fr;
-    gap: 18px;
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-    align-items: start;
-    padding: 14px;
-    margin: -14px;
-    border-radius: 20px;
-    transition: transform 0.3s ease, background 0.3s ease;
-  }
-  .proj-item:hover { transform: translateX(4px); background: rgba(160, 44, 44, 0.05); }
-  .proj-thumb {
-    width: 64px; height: 64px;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid var(--rule);
-    background: var(--bg-2);
-    flex-shrink: 0;
-    transition: all 0.3s ease;
-  }
-  .proj-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .proj-content { padding-top: 4px; }
-  .proj-title-row {
-    display: flex; flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    column-gap: 14px; row-gap: 14px;
-    margin-bottom: 8px;
-  }
-  .proj-content h3 {
-    font-family: var(--display); font-size: 25px;
-    font-weight: 500; line-height: 1.15;
-    letter-spacing: -0.01em;
-  }
-  .proj-content h3 em { font-style: italic; color: var(--accent); }
-  .proj-status {
-    display: inline-flex; align-items: center; gap: 8px;
-    white-space: nowrap;
-    font-family: var(--sans); font-size: 10px; font-weight: 600;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--muted);
-  }
-  .proj-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    display: inline-block; flex-shrink: 0;
-  }
-  .proj-dot-live { background: #3fae5a; box-shadow: 0 0 8px rgba(63, 174, 90, 0.55); }
-  .proj-dot-personal { background: #8a6bd4; box-shadow: 0 0 8px rgba(138, 107, 212, 0.5); }
-  .proj-dot-exploring { background: #d49a3a; box-shadow: 0 0 8px rgba(212, 154, 58, 0.5); }
-  .proj-content p {
-    font-family: var(--serif); font-size: 15px;
-    line-height: 1.5; color: var(--ink-soft);
-  }
-  .proj-content p em { font-style: italic; }
-  .proj-cta {
-    display: inline-flex; align-items: center; gap: 6px;
-    margin-top: 12px;
-    font-family: var(--sans); font-size: 11px; font-weight: 600;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--accent);
-    transition: gap 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .proj-cta .arr { font-family: var(--serif); font-size: 13px; font-weight: 400; }
-  .proj-item:hover .proj-cta { gap: 12px; }
-
-  /* Writing */
-  .writing-list { list-style: none; }
-  .writing-row {
-    display: grid; grid-template-columns: 1fr auto;
-    gap: 16px; padding: 22px 0;
-    border-bottom: 1px solid var(--rule);
-    align-items: baseline; cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none; color: inherit;
-    margin: 0 -16px; padding-left: 16px; padding-right: 16px;
-    border-radius: 4px;
-  }
-  .writing-row:hover { background: rgba(160, 44, 44, 0.05); padding-left: 24px; }
-  .writing-row:first-of-type { border-top: 1px solid var(--rule); }
-  .writing-row .w-title { font-family: var(--serif); font-size: clamp(17px, 2vw, 20px); line-height: 1.3; color: var(--ink); font-weight: 400; }
-  .writing-row .w-title em { font-style: italic; }
-  .writing-row .w-meta { font-family: var(--sans); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
-  .writing-row .w-meta.coming { color: var(--accent); }
-
-  /* Substack CTA */
-  .substack-cta {
-    margin-top: 40px;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 24px; flex-wrap: wrap;
-    background: var(--bg-card); border: 1px solid var(--rule);
-    border-radius: 20px; padding: 30px 34px;
-    text-decoration: none; color: inherit;
-    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .substack-cta:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 24px 48px -16px rgba(28, 35, 51, 0.14); }
-  .substack-cta-text { max-width: 560px; }
-  .substack-cta-text p { font-family: var(--serif); font-size: 15.5px; line-height: 1.5; color: var(--ink-soft); }
-  .substack-cta-text p em { font-style: italic; }
-  .substack-btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 14px 24px; border-radius: 100px;
-    background: var(--accent); color: var(--bg);
-    font-family: var(--sans); font-size: 11.5px; font-weight: 600;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    white-space: nowrap; flex-shrink: 0;
-    transition: background 0.25s;
-  }
-  .substack-cta:hover .substack-btn { background: var(--accent-deep); }
-  .substack-btn .arr { font-family: var(--serif); font-size: 14px; }
-
-  /* Other things */
-  .other-section { padding: 70px 24px !important; }
-  @media (min-width: 720px) { .other-section { padding: 80px 48px !important; } }
-  .other-section .sec-head { margin-bottom: 32px; }
-  .other-section .sec-head h2 { font-size: clamp(28px, 4.5vw, 36px); }
-  .other-things { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  @media (min-width: 720px) { .other-things { grid-template-columns: repeat(4, 1fr); } }
-  .thing-card {
-    background: var(--bg-card); border: 1px solid var(--rule);
-    border-radius: 14px; padding: 22px 20px;
-    transition: all 0.3s ease;
-    text-decoration: none; color: inherit;
-    display: block;
-  }
-  .thing-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 16px 32px -12px rgba(60, 40, 20, 0.12); }
-  .thing-card .icon { font-size: 32px; line-height: 1; margin-bottom: 12px; }
-  .thing-card h4 { font-family: var(--display); font-size: 18px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 4px; }
-  .thing-card p { font-family: var(--serif); font-size: 13.5px; line-height: 1.4; color: var(--muted); }
-
-  /* Contact */
-  .contact-section { background: var(--dark); color: var(--bg); max-width: none; margin: 0; padding: 100px 24px; text-align: center; }
-  @media (min-width: 720px) { .contact-section { padding: 140px 48px; } }
-  .contact-inner { max-width: 600px; margin: 0 auto; }
-  .contact-section h2 { font-family: var(--display); font-size: clamp(48px, 9vw, 80px); font-weight: 400; line-height: 0.95; letter-spacing: -0.025em; margin-bottom: 28px; }
-  .contact-section h2 em { font-style: italic; color: var(--accent); }
-  .contact-section .lead { font-family: var(--serif); font-size: 19px; line-height: 1.5; color: rgba(250, 246, 238, 0.8); margin-bottom: 40px; max-width: 460px; margin-left: auto; margin-right: auto; }
-  .contact-btn { display: inline-block; padding: 18px 36px; background: var(--bg); color: var(--ink); text-decoration: none; border-radius: 100px; font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; transition: all 0.25s; margin-bottom: 28px; }
-  .contact-btn:hover { background: var(--accent); color: var(--bg); transform: translateY(-2px); }
-  .social-row { display: flex; gap: 24px; justify-content: center; margin-top: 36px; }
-  .social-row a {
-    color: rgba(250, 246, 238, 0.5);
-    text-decoration: none;
-    transition: color 0.2s, transform 0.2s;
-    display: inline-flex;
-    align-items: center;
-  }
-  .social-row a:hover { color: var(--accent); transform: translateY(-2px); }
-  .copy-row { margin-top: 56px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08); font-family: var(--sans); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(250, 246, 238, 0.4); }
-
-  /* Reveal on scroll */
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
-  .reveal.in { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
 
-<!-- Nav -->
-<header class="site-nav">
-  <div class="nav-inner">
-    <a href="#" class="nav-brand">leslie<em>.</em></a>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
-      <span class="nav-toggle-bars"><span></span><span></span><span></span></span>
-    </button>
-    <nav class="nav-links" id="nav-links">
-      <a href="#about">about</a>
-      <a href="#career">career</a>
-      <a href="#advising">advising</a>
-      <a href="#projects">projects</a>
-      <a href="#writing">writing</a>
-      <a href="#contact">contact</a>
-    </nav>
-  </div>
-</header>
+<!-- pixel icon sprites -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-floppy" viewBox="0 0 16 16"><path fill="currentColor" d="M1 1h12l2 2v12H1zM4 2v4h7V2zM8 3h2v2H8zM4 9h8v5H4z"/><path fill="var(--paper)" d="M5 10h6v3H5z"/></symbol>
+  <symbol id="i-cursor" viewBox="0 0 16 16"><path fill="currentColor" d="M2 1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1H8v1h1v1h1v1h1v1H9v-1H8v-1H7v-1H6v1H5v1H4v1H3v1H2z"/><path fill="var(--paper)" d="M3 3h1v1h1v1h1v1h1v1h1v1h1v1H7v1H6v1H5v1H4v1H3z"/></symbol>
+  <symbol id="i-cd" viewBox="0 0 16 16"><path fill="currentColor" d="M5 1h6v1h2v1h1v2h1v6h-1v2h-1v1h-2v1H5v-1H3v-1H2v-2H1V5h1V3h1V2h2z"/><path fill="var(--paper)" d="M7 7h2v2H7z"/><path fill="var(--pane)" d="M4 4h2v1H4zM10 10h2v1h-2z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 16 16"><path fill="currentColor" d="M1 3h14v10H1z"/><path fill="var(--paper)" d="M2 4h12v1h-1v1h-1v1h-1v1H9v1H7V8H6V7H5V6H4V5H3V4H2zM2 6h1v1h1v1h1v1h1v1h4V9h1V8h1V7h1V6h1v6H2z"/></symbol>
+  <symbol id="i-hourglass" viewBox="0 0 16 16"><path fill="currentColor" d="M3 1h10v3h-1v2h-1v1h-1v2h1v1h1v2h1v3H3v-3h1v-2h1V9h1V7H5V6H4V4H3z"/><path fill="var(--note)" d="M5 2h6v2h-1v2h-1v1H7V6H6V4H5zM6 12h4v2H6z"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 16 16"><path fill="currentColor" d="M11 1h2v1h1v1h1v2h-1v1h-1v1h-1v1h-1v1H10v1H9v1H8v1H7v1H6v1H5v1H1v-4h1v-1h1v-1h1V9h1V8h1V7h1V6h1V5h1V4h1V3h1V2h1z"/><path fill="var(--note)" d="M2 11h2v1h1v2H2z"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 16 16"><path fill="currentColor" d="M2 3h3v1h1v1h1v1h2V5h1V4h1V3h3v1h1v1h1v4h-1v1h-1v1h-1v1h-1v1h-1v1H9v1H7v-1H6v-1H5v-1H4v-1H3v-1H2V9H1V5h1z"/></symbol>
+  <symbol id="i-plant" viewBox="0 0 16 16"><path fill="#4d9a6f" d="M7 9h2v3H7zM4 3h3v1h1v1h1V4h1V3h3v1h-1v1h-1v1h-1v1H9v1H7V7H6V6H5V5H4z"/><path fill="var(--line)" d="M4 12h8v1h-1v2H5v-2H4z"/></symbol>
+  <symbol id="i-term" viewBox="0 0 16 16"><path fill="var(--line)" d="M1 2h14v12H1z"/><path fill="#7ef0b1" d="M3 5h1v1h1v1h1v1H5v1H4v1H3V9h1V8H3zM7 10h5v1H7z"/></symbol>
+  <symbol id="i-case" viewBox="0 0 16 16"><path fill="var(--line)" d="M5 2h6v2h4v10H1V4h4zM6 3v1h4V3z"/><path fill="var(--note)" d="M2 5h12v3H9v1H7V8H2z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 16 16"><path fill="currentColor" d="M7 1h2v4h1v1h1v1h4v2h-2v1h-1v1h-1v4H9v-2H8v-1H7v1H6v2H4v-4H3v-1H2V9H0V7h4V6h1V5h1V1z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 16 16">
+    <path fill="currentColor" d="M2 2h12v12H2z"/>
+    <path fill="var(--paper)" d="M5 3h8v10H5z"/>
+    <path fill="var(--hi)" d="M3 4h1v8H3zM6 5h6v1H6zM6 7h6v1H6zM6 9h4v1H6z"/>
+  </symbol>
+  <symbol id="i-disco" viewBox="0 0 16 16">
+    <path fill="currentColor" d="M7 1h2v2H7z"/>
+    <path fill="var(--hi)" d="M5 3h6v1h1v1h1v6h-1v1h-1v1H5v-1H4v-1H3V5h1V4h1z"/>
+    <path fill="var(--paper)" d="M5 5h2v2H5zM9 5h2v2H9zM7 8h2v2H7zM5 10h2v2H5zM9 10h2v2H9z"/>
+  </symbol>
+  <symbol id="i-pot" viewBox="0 0 16 16">
+    <path fill="currentColor" d="M7 0h2v2H7zM3 2h10v2H3zM1 6h2v3H1zM13 6h2v3h-2zM3 5h10v10H3z"/>
+    <path fill="var(--mint)" d="M5 7h6v6H5z"/>
+  </symbol>
+  <symbol id="i-wave" viewBox="0 0 16 16">
+    <path fill="currentColor" d="M7 0h2v1H7zM6 1h4v1H6zM5 2h6v1H5zM4 3h8v1H4zM3 4h10v6H3zM4 10h8v1H4zM5 11h6v1H5zM6 12h4v1H6zM7 13h2v1H7z"/>
+    <path fill="var(--hi)" d="M7 2h2v11H7zM0 15h7v1H0zM9 15h7v1H9z"/>
+  </symbol>
+</svg>
 
-<!-- Hero -->
-<section class="hero">
-  <div class="hero-eyebrow">FOUNDER · OPERATOR · ADVISOR · NYC</div>
-  <h1>Hi, <span class="wave">👋</span> I'm<br><span class="name-i">Leslie</span></h1>
-  <div class="hero-bio">
-    <p>2x founder, operator, advisor, and <em>just trying to be useful where I can!</em></p>
-  </div>
-  <div class="hero-cta">
-    <a href="#contact" class="btn primary">Contact me <span class="arr">→</span></a>
-    <a href="#career" class="btn ghost">See my work <span class="arr">↓</span></a>
-  </div>
-</section>
-
-<!-- About + Stat strip -->
-<section id="about" class="reveal">
-  <div class="sec-head">
-    <h2>About <em>me</em></h2>
-  </div>
-  <div class="about-section">
-    <div class="photo-wrap">
-      <div class="photo">
-        <span class="photo-tape"></span>
-        <img src="images/leslie.png" alt="Leslie Busick">
-      </div>
-    </div>
-    <div class="about-content">
-      <p class="body-line"><span class="label">The short version</span> Hi, I'm Leslie. 2x healthcare founder and former "finance girly" originally from CA, currently in NYC.</p>
-      <p class="body-line"><span class="label">The longer version</span> I started in finance then left to start my first company at 26: a DTC women's health platform. It didn't work, but we took the lessons and applied them into a second company: a B2B SaaS platform offering white-label AI and telehealth to clinics. Both were crazy rides. <em>I had a lot of fun, suffered even more, and learned a few things along the way.</em></p>
-      <p class="body-line">Now I advise, angel invest, build things on the side, and try to be useful to <span class="accent">early stage founders</span>.</p>
-    </div>
+<div class="browser">
+  <div class="browser__bar">
+    <div class="lights"><i></i><i></i><i></i></div>
+    <div class="browser__url">welcome to lesliebusick.com<span class="cursor"></span></div>
+    <div style="font-size:12px" aria-hidden="true">&mdash;</div>
   </div>
 
-  <div class="stat-strip">
-    <div class="stat-item">
-      <div class="stat-num">2</div>
-      <div class="stat-label">Companies founded</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num"><em>$10M</em></div>
-      <div class="stat-label">Raised</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num"><em>$2M</em></div>
-      <div class="stat-label">Sales · 6 months</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">6<em>+</em></div>
-      <div class="stat-label">Years operating</div>
-    </div>
-  </div>
-</section>
+  <nav class="tabs" aria-label="Site sections">
+    <span class="plus" aria-hidden="true">+</span>
+    <a class="on" href="#about">about</a>
+    <a href="#career">career</a>
+    <a href="#advising">advising</a>
+    <a href="#projects">projects</a>
+    <a href="#writing">writing</a>
+    <a href="#contact">contact</a>
+  </nav>
 
-<!-- Career -->
-<section id="career" class="career-section reveal">
-  <div class="career-inner">
-    <div class="sec-head">
-      <h2>Career + <em>running companies</em></h2>
-    </div>
-
-    <div class="career-row">
-      <div class="career-meta">
-        <span class="yr">2024 – 2026</span>
-      </div>
-      <div class="career-name">
-        <h3>Stealth</h3>
-        <div class="role">Co-Founder</div>
-        <ul class="career-bullets">
-          <li>B2B SaaS providing white-label AI and telehealth to clinics</li>
-          <li>0 → $2M+ in sales in 6 months</li>
-          <li>Raised from top VCs across rounds that closed in just a couple of days</li>
-          <li>Landed large enterprise contracts</li>
-        </ul>
+  <!-- HERO -->
+  <div class="hero" id="top">
+    <div>
+      <div class="eyebrow">founder &middot; operator &middot; advisor &middot; nyc</div>
+      <h1>leslie<br>busick<svg class="px spark" aria-hidden="true"><use href="#i-star"/></svg></h1>
+      <p class="tag">2x founder, operator, advisor, and just trying to be useful where I can!</p>
+      <div class="hero-cta">
+        <a class="btn fill" href="#contact">contact me &rarr;</a>
+        <a class="btn" href="#career">see my work &darr;</a>
       </div>
     </div>
-
-    <div class="career-row">
-      <div class="career-meta">
-        <span class="yr">2020 – 2023</span>
+    <figure class="win photo" style="margin:0">
+      <div class="win__bar"><span>leslie_busick.jpg</span><div class="win__ctl" aria-hidden="true"><i class="min"></i><i class="max"></i><i class="close"></i></div></div>
+      <div class="win__body">
+        <img src="images/leslie_portrait.jpg" alt="Leslie Busick" width="1000" height="1250">
+        <div class="scroll" aria-hidden="true"><i class="up"></i><i class="down"></i></div>
       </div>
-      <div class="career-name">
-        <h3>Odela</h3>
-        <div class="role">Founder</div>
-        <ul class="career-bullets">
-          <li>DTC women's health platform. Think Hims, but for menopause and sexual health</li>
-          <li>Didn't find PMF. What we learned became the foundation for the next company</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="career-row">
-      <div class="career-meta">
-        <span class="yr">2016 – 2020</span>
-      </div>
-      <div class="career-name">
-        <p class="before-line"><strong>Before that:</strong> &nbsp;Investment banking <em>(TMT M&amp;A @ Centerview)</em>, then a generalist <em>@ KKR</em>.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Advising -->
-<section id="advising" class="reveal">
-  <div class="sec-head">
-    <h2>Advising + <em>investing</em></h2>
-    <p>Some tech, some AI, some neither. All early stage.</p>
+    </figure>
   </div>
 
-  <div class="advising-grid">
-
-    <div class="adv-card">
-      <div class="adv-cat">
-        <span class="emoji">🌱</span>
-        Ag Climate Tech
-      </div>
-      <p>Ag climate tech company tackling agriculture's biggest input costs via a subsurface irrigation system resulting in a 70% water and energy reduction, plus 20% yield gain on crops.</p>
-      <div class="my-role">
-        <strong>My role:</strong> Early investor + advisor on product and GTM. Helped launch their carbon credits strategy.
-      </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>hi, i'm leslie<svg class="px"><use href="#i-star"/></svg>2x healthcare founder<svg class="px"><use href="#i-star"/></svg>former finance girly<svg class="px"><use href="#i-star"/></svg>CA &rarr; NYC<svg class="px"><use href="#i-star"/></svg>advising, angel investing, shipping side projects<svg class="px"><use href="#i-star"/></svg></span>
+      <span>hi, i'm leslie<svg class="px"><use href="#i-star"/></svg>2x healthcare founder<svg class="px"><use href="#i-star"/></svg>former finance girly<svg class="px"><use href="#i-star"/></svg>CA &rarr; NYC<svg class="px"><use href="#i-star"/></svg>advising, angel investing, shipping side projects<svg class="px"><use href="#i-star"/></svg></span>
     </div>
-
-    <div class="adv-card">
-      <div class="adv-cat">
-        <span class="emoji">👩‍💻</span>
-        AI Dev Tools
-      </div>
-      <p>AI dev tools company building code review infrastructure for the AI coding agent era. Codifies what engineers know into enforceable rules that catch bad AI-generated code before it ships.</p>
-      <div class="my-role">
-        <strong>My role:</strong> Advisor on GTM and ICP refinement.
-      </div>
-    </div>
-
-    <div class="adv-card">
-      <div class="adv-cat">
-        <span class="emoji">💼</span>
-        SMB PE
-      </div>
-      <p>Small PE firm focused on buying service-oriented SMBs and growing them by layering in tech, operational rigor, and a clear growth playbook.</p>
-      <div class="my-role">
-        <strong>My role:</strong> Carried advisor. Surface acquisition targets, open my network, help shape pitch and strategy.
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- Projects -->
-<section id="projects" class="reveal">
-  <div class="sec-head">
-    <h2>Side projects + <em>tinkering</em> just for fun</h2>
-    <p>I ship constantly, including outside of work, because <em style="color: var(--accent);">I can't not</em>. I genuinely love solving problems and tend to build for problems me or the people around me personally feel. These are some things I've built, am building, or am thinking about. Mostly for myself or friends. <em>Poke around, feedback welcome!</em></p>
   </div>
 
-  <div class="projects-grid">
+  <!-- ABOUT -->
+  <section id="about">
+    <h2><svg class="px" aria-hidden="true"><use href="#i-floppy"/></svg>about me</h2>
+    <div class="about">
+      <div class="win">
+        <div class="win__bar"><span>readme.txt</span><div class="win__ctl" aria-hidden="true"><i class="close"></i></div></div>
+        <div class="win__body">
+          <p><span class="lbl">the short version</span>Hi, I'm Leslie. 2x healthcare founder and former "finance girly" originally from CA, currently in NYC.</p>
+          <p><span class="lbl">the longer version</span>I started in finance then left to start my first company at 26: a DTC women's health platform. It didn't work, but we took the lessons and applied them into a second company: a B2B SaaS platform offering white-label AI and telehealth to clinics. Both were crazy rides. <i>I had a lot of fun, suffered even more, and learned a few things along the way.</i></p>
+          <p style="margin:0">Now I advise, angel invest, build things on the side, and try to be useful to early stage founders.</p>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>2</b><span>companies founded</span></div>
+        <div class="stat"><b>$10M</b><span>raised</span></div>
+        <div class="stat"><b>$2M</b><span>sales &middot; 6 months</span></div>
+        <div class="stat"><b>6+</b><span>years operating</span></div>
+      </div>
+    </div>
+    <div class="pnum">001 / 2026</div>
+  </section>
 
-    <a href="https://join-fabled.vercel.app/" target="_blank" rel="noopener" class="proj-item">
-      <div class="proj-thumb"><img src="images/fabled_icon.png" alt="Fabled"></div>
-      <div class="proj-content">
-        <div class="proj-title-row">
-          <h3>Fabled</h3>
-          <span class="proj-status"><span class="proj-dot proj-dot-live"></span>Live</span>
+  <!-- CAREER -->
+  <section id="career">
+    <svg class="px deco" aria-hidden="true" style="right:40px;top:34px;width:34px;height:34px;color:var(--hi)"><use href="#i-hourglass"/></svg>
+    <h2><svg class="px" aria-hidden="true"><use href="#i-cursor"/></svg>career + running companies</h2>
+    <div class="win">
+      <div class="win__bar"><span>career.log</span><div class="win__ctl" aria-hidden="true"><i class="min"></i><i class="max"></i><i class="close"></i></div></div>
+      <div class="win__body">
+        <div class="job">
+          <div class="yr">2024 &ndash; 2026</div>
+          <div>
+            <h3>Stealth <small>co-founder</small></h3>
+            <ul>
+              <li>B2B SaaS providing white-label AI and telehealth to clinics</li>
+              <li>0 &rarr; $2M+ in sales in 6 months</li>
+              <li>Raised from top VCs across rounds that closed in just a couple of days</li>
+              <li>Landed large enterprise contracts</li>
+            </ul>
+          </div>
+        </div>
+        <div class="job">
+          <div class="yr">2020 &ndash; 2023</div>
+          <div>
+            <h3>Odela <small>founder</small></h3>
+            <ul>
+              <li>DTC women's health platform. Think Hims, but for menopause and sexual health</li>
+              <li>Didn't find PMF. What we learned became the foundation for the next company</li>
+            </ul>
+          </div>
+        </div>
+        <div class="job">
+          <div class="yr">2016 &ndash; 2020</div>
+          <div>
+            <h3>Before that</h3>
+            <p style="margin:0">Investment banking <i>(TMT M&amp;A @ Centerview)</i>, then a generalist <i>@ KKR</i>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pnum">002 / 2026</div>
+  </section>
+
+  <!-- ADVISING -->
+  <section id="advising">
+    <h2><svg class="px" aria-hidden="true"><use href="#i-cd"/></svg>advising + investing</h2>
+    <p style="margin-bottom:18px">Some tech, some AI, some neither. All early stage.</p>
+    <div class="adv">
+      <div class="win">
+        <div class="win__bar"><span>ag_climate.exe</span><div class="win__ctl" aria-hidden="true"><i class="close"></i></div></div>
+        <div class="win__body">
+          <svg class="px ico" aria-hidden="true"><use href="#i-plant"/></svg>
+          <h3>Ag Climate Tech</h3>
+          <p>Tackling agriculture's biggest input costs via a subsurface irrigation system: 70% water and energy reduction, plus 20% yield gain on crops.</p>
+          <div class="role"><b>my role:</b> early investor + advisor on product and GTM. Helped launch their carbon credits strategy.</div>
+        </div>
+      </div>
+      <div class="win">
+        <div class="win__bar"><span>devtools.exe</span><div class="win__ctl" aria-hidden="true"><i class="close"></i></div></div>
+        <div class="win__body">
+          <svg class="px ico" aria-hidden="true"><use href="#i-term"/></svg>
+          <h3>AI Dev Tools</h3>
+          <p>Code review infrastructure for the AI coding agent era. Codifies what engineers know into enforceable rules that catch bad AI-generated code before it ships.</p>
+          <div class="role"><b>my role:</b> advisor on GTM and ICP refinement.</div>
+        </div>
+      </div>
+      <div class="win">
+        <div class="win__bar"><span>smb_pe.exe</span><div class="win__ctl" aria-hidden="true"><i class="close"></i></div></div>
+        <div class="win__body">
+          <svg class="px ico" aria-hidden="true"><use href="#i-case"/></svg>
+          <h3>SMB PE</h3>
+          <p>Small PE firm buying service-oriented SMBs and growing them by layering in tech, operational rigor, and a clear growth playbook.</p>
+          <div class="role"><b>my role:</b> carried advisor. Surface acquisition targets, open my network, help shape pitch and strategy.</div>
+        </div>
+      </div>
+    </div>
+    <div class="pnum">003 / 2026</div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <svg class="px deco" aria-hidden="true" style="right:40px;top:36px;width:34px;height:34px;color:var(--hi)"><use href="#i-star"/></svg>
+    <h2><svg class="px" aria-hidden="true"><use href="#i-heart"/></svg>side projects + tinkering</h2>
+    <p style="margin-bottom:18px;max-width:64ch">I ship constantly, including outside of work, because <i>I can't not</i>. I tend to build for problems me or the people around me personally feel. Mostly for myself or friends. Poke around, feedback welcome!</p>
+    <div class="proj">
+
+      <a class="pcard" href="https://join-fabled.vercel.app/" target="_blank" rel="noopener">
+        <div class="top">
+          <div class="icon"><img src="images/fabled_icon.png" alt="" onerror="this.classList.add('err')"><span class="fb" aria-hidden="true">F</span></div>
+          <h3>Fabled<span class="pill">live</span></h3>
         </div>
         <p>Whimsy AI book club that tells you your reading aura, surfaces new books, and generates discussion questions.</p>
-        <span class="proj-cta">Join Fabled <span class="arr">→</span></span>
-      </div>
-    </a>
+        <span class="go">join fabled &rarr;</span>
+      </a>
 
-    <a href="https://getunhinged.ai" target="_blank" rel="noopener" class="proj-item">
-      <div class="proj-thumb"><img src="images/unhinged_icon.png" alt="Unhinged"></div>
-      <div class="proj-content">
-        <div class="proj-title-row">
-          <h3>Unhinged</h3>
-          <span class="proj-status"><span class="proj-dot proj-dot-exploring"></span>Private beta</span>
+      <a class="pcard" href="https://getunhinged.ai" target="_blank" rel="noopener">
+        <div class="top">
+          <div class="icon"><img src="images/unhinged_icon.png" alt="" onerror="this.classList.add('err')"><span class="fb" aria-hidden="true">U</span></div>
+          <h3>Unhinged<span class="pill beta">private beta</span></h3>
         </div>
         <p>AI compatibility layer and matchmaker that thinks about fit the way a smart friend would, and surfaces matches the swipe-driven apps miss.</p>
-        <span class="proj-cta">Get Unhinged <span class="arr">→</span></span>
-      </div>
-    </a>
+        <span class="go">get unhinged &rarr;</span>
+      </a>
 
-    <a href="https://github.com/leslie-lauren/agent-office" target="_blank" rel="noopener" class="proj-item">
-      <div class="proj-thumb"><img src="images/agent_office_icon.png" alt="Agent Office"></div>
-      <div class="proj-content">
-        <div class="proj-title-row">
-          <h3>Agent Office</h3>
-          <span class="proj-status"><span class="proj-dot proj-dot-live"></span>Open source</span>
+      <a class="pcard" href="https://github.com/leslie-lauren/agent-office" target="_blank" rel="noopener">
+        <div class="top">
+          <div class="icon"><img src="images/agent_office_icon.png" alt="" onerror="this.classList.add('err')"><span class="fb" aria-hidden="true">A</span></div>
+          <h3>Agent Office<span class="pill oss">open source</span></h3>
         </div>
-        <p>Pixel-art dashboard where my Claude agents show up as little characters working in a tiny office, so I can see what they're all doing at a glance.</p>
-        <span class="proj-cta">Get an office <span class="arr">→</span></span>
-      </div>
-    </a>
+        <p>Pixel-art dashboard where my Claude agents show up as little characters working in a tiny office, so I can see what they're doing at a glance.</p>
+        <span class="go">get an office &rarr;</span>
+      </a>
 
-    <a href="https://mytrova.vercel.app" target="_blank" rel="noopener" class="proj-item">
-      <div class="proj-thumb"><img src="images/trova_icon.png" alt="Trova"></div>
-      <div class="proj-content">
-        <div class="proj-title-row">
-          <h3>Trova</h3>
-          <span class="proj-status"><span class="proj-dot proj-dot-live"></span>Live</span>
+      <a class="pcard" href="https://mytrova.vercel.app" target="_blank" rel="noopener">
+        <div class="top">
+          <div class="icon"><img src="images/trova_icon.png" alt="" onerror="this.classList.add('err')"><span class="fb" aria-hidden="true">T</span></div>
+          <h3>Trova<span class="pill">live</span></h3>
         </div>
         <p>Wishlist app that saves items from any store in one place, watches for sales, and hunts down coupon codes before you buy.</p>
-        <span class="proj-cta">Try Trova <span class="arr">→</span></span>
-      </div>
-    </a>
+        <span class="go">try trova &rarr;</span>
+      </a>
 
-    <a href="https://rummikub-snowy.vercel.app" target="_blank" rel="noopener" class="proj-item">
-      <div class="proj-thumb"><img src="images/rummikub_icon.png" alt="Rummikub"></div>
-      <div class="proj-content">
-        <div class="proj-title-row">
-          <h3>Rummikub</h3>
-          <span class="proj-status"><span class="proj-dot proj-dot-live"></span>Live</span>
+      <a class="pcard" href="https://rummikub-snowy.vercel.app" target="_blank" rel="noopener">
+        <div class="top">
+          <div class="icon"><img src="images/rummikub_icon.png" alt="" onerror="this.classList.add('err')"><span class="fb" aria-hidden="true">R</span></div>
+          <h3>Rummikub<span class="pill">live</span></h3>
         </div>
-        <p>My family's fave game, on the go! The classic tile game rebuilt for browser (mobile friendly) in a single HTML file so you can play anytime, anywhere.</p>
-        <span class="proj-cta">Play a round <span class="arr">→</span></span>
-      </div>
-    </a>
+        <p>My family's fave game, on the go. The classic tile game rebuilt for the browser in a single HTML file so you can play anytime, anywhere.</p>
+        <span class="go">play a round &rarr;</span>
+      </a>
 
-    <a href="mailto:busickleslie@gmail.com?subject=Orbit access request" class="proj-item">
-      <div class="proj-thumb"><img src="images/orbit_splash.svg" alt="Orbit"></div>
-      <div class="proj-content">
-        <div class="proj-title-row">
-          <h3>Orbit</h3>
-          <span class="proj-status"><span class="proj-dot proj-dot-exploring"></span>Personal tool</span>
+      <a class="pcard" href="mailto:busickleslie@gmail.com?subject=Orbit access request">
+        <div class="top">
+          <div class="icon"><img src="images/orbit_splash.svg" alt="" onerror="this.classList.add('err')"><span class="fb" aria-hidden="true">O</span></div>
+          <h3>Orbit<span class="pill oss">personal tool</span></h3>
         </div>
-        <p>Agentic personal CRM I built for myself on Airtable plus the Claude API to manage relationships the way a great chief of staff would.</p>
-        <span class="proj-cta">Request access <span class="arr">→</span></span>
+        <p>Agentic personal CRM I built for myself on Airtable plus the Claude API, to manage relationships the way a great chief of staff would.</p>
+        <span class="go">request access &rarr;</span>
+      </a>
+
+    </div>
+    <div class="pnum">004 / 2026</div>
+  </section>
+
+  <!-- WRITING + OTHER THINGS -->
+  <section id="writing">
+    <h2><svg class="px" aria-hidden="true"><use href="#i-pencil"/></svg>thinking + writing</h2>
+    <div class="two">
+      <div class="win">
+        <div class="win__bar"><span>writing.exe</span><div class="win__ctl" aria-hidden="true"><i class="close"></i></div></div>
+        <div class="win__body" style="padding:8px 14px">
+          <a class="essay" href="https://lesliethethird.substack.com/p/nothing-prepared-me-for-this" target="_blank" rel="noopener"><b>Nothing Prepared Me for This</b><small>on substack</small></a>
+          <a class="essay" href="https://lesliethethird.substack.com/p/how-we-grew-from-0-2m-in-6-months" target="_blank" rel="noopener"><b>How We Grew from 0 &rarr; $2M in 6 Months</b><small>on substack</small></a>
+          <a class="essay" href="#"><b>The Space Between: 6 of My Predictions on Where I Think AI Goes from Here</b><small>coming soon</small></a>
+          <div style="padding:12px 4px 6px;font-size:13px">
+            <a href="https://lesliethethird.substack.com" target="_blank" rel="noopener">read on substack &rarr;</a>
+            <span style="opacity:.75">field notes from building companies, essays, opinions, AI, introspection, and a little of this and that.</span>
+          </div>
+        </div>
       </div>
-    </a>
-
-  </div>
-</section>
-
-<!-- Writing -->
-<section id="writing" class="reveal">
-  <div class="sec-head">
-    <h2>Thinking + <em>writing</em></h2>
-    <p>Essays on how I think, operating, building, and the things I've gotten wrong along the way.</p>
-  </div>
-
-  <ul class="writing-list">
-    <li><a href="https://lesliethethird.substack.com/p/nothing-prepared-me-for-this" target="_blank" rel="noopener" class="writing-row"><div class="w-title">Nothing Prepared Me for This</div><div class="w-meta">On Substack</div></a></li>
-    <li><a href="https://lesliethethird.substack.com/p/how-we-grew-from-0-2m-in-6-months" target="_blank" rel="noopener" class="writing-row"><div class="w-title">How We Grew from 0 → $2M in 6 Months</div><div class="w-meta">On Substack</div></a></li>
-    <li><a href="#" class="writing-row"><div class="w-title">The Space Between: 6 of My Predictions on Where I Think AI Goes from Here</div><div class="w-meta coming">Coming soon</div></a></li>
-  </ul>
-
-  <a href="https://lesliethethird.substack.com" target="_blank" rel="noopener" class="substack-cta">
-    <div class="substack-cta-text">
-      <p>Find me on Substack! Field notes from building companies, essays, opinions, AI, introspection, and a little of <em>this and that</em> sprinkled in.</p>
+      <aside class="note win">
+        <div class="win__bar"><span>other_things_i_love.txt</span><div class="win__ctl" aria-hidden="true"><i class="close"></i></div></div>
+        <div class="win__body">
+          <ul class="loves">
+            <li><svg class="px" aria-hidden="true"><use href="#i-book"/></svg><div><b>reading</b><span>currently <i>Blindsight</i> by Watts</span></div></li>
+            <li><svg class="px" aria-hidden="true"><use href="#i-disco"/></svg><div><b>dancing</b><span>competitive bronze pro-am ballroom</span></div></li>
+            <li><svg class="px" aria-hidden="true"><use href="#i-pot"/></svg><div><b>cooking</b><span>mostly healthy, occasional baked sweet treat</span></div></li>
+            <li><svg class="px" aria-hidden="true"><use href="#i-wave"/></svg><div><b>surfing</b><span>certified kook</span></div></li>
+          </ul>
+        </div>
+      </aside>
     </div>
-    <span class="substack-btn">Read on Substack <span class="arr">→</span></span>
-  </a>
-</section>
+    <div class="pnum">005 / 2026</div>
+  </section>
 
-<!-- Other things -->
-<section id="other" class="reveal other-section">
-  <div class="sec-head">
-    <h2>Other things I <em>love</em></h2>
-  </div>
-
-  <div class="other-things">
-    <a href="#" class="thing-card">
-      <div class="icon">📚</div>
-      <h4>Reading</h4>
-      <p>Currently reading <em>Blindsight</em> by Watts.</p>
-    </a>
-    <a href="#" class="thing-card">
-      <div class="icon">💃</div>
-      <h4>Dancing</h4>
-      <p>Competitive bronze pro-am ballroom dancer.</p>
-    </a>
-    <a href="#" class="thing-card">
-      <div class="icon">👩‍🍳</div>
-      <h4>Cooking</h4>
-      <p>Mostly healthy with the occasional baked sweet treat.</p>
-    </a>
-    <a href="#" class="thing-card">
-      <div class="icon">🏄‍♀️</div>
-      <h4>Surfing</h4>
-      <p>Certified kook.</p>
-    </a>
-  </div>
-</section>
-
-<!-- Contact -->
-<section id="contact" class="contact-section reveal">
-  <div class="contact-inner">
-    <h2>Let's <em>talk</em></h2>
-    <p class="lead">If you’re working on something interesting, I advise and angel invest in a handful of founders. So please reach out if you want to connect!</p>
-    <a href="mailto:busickleslie@gmail.com" class="contact-btn">Contact me</a>
-    <div class="social-row">
-      <a href="https://github.com/leslie-lauren" target="_blank" rel="noopener" aria-label="GitHub">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-      </a>
-      <a href="https://x.com/leslie_the_3rd" target="_blank" rel="noopener" aria-label="X (Twitter)">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      </a>
-      <a href="https://www.linkedin.com/in/lesliebusick/" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      </a>
+  <!-- CONTACT -->
+  <section id="contact" style="border-bottom:0">
+    <h2><svg class="px" aria-hidden="true"><use href="#i-mail"/></svg>let's talk</h2>
+    <div class="win">
+      <div class="win__bar"><span>new_message.msg</span><div class="win__ctl" aria-hidden="true"><i class="min"></i><i class="max"></i><i class="close"></i></div></div>
+      <div class="win__body contact">
+        <p style="margin:0;max-width:52ch">If you're working on something interesting, I advise and angel invest in a handful of founders. So please reach out if you want to connect!</p>
+        <div class="socials">
+          <a class="btn fill" href="mailto:busickleslie@gmail.com">contact me</a>
+          <a class="btn" href="https://github.com/leslie-lauren" target="_blank" rel="noopener">github</a>
+          <a class="btn" href="https://x.com/leslie_the_3rd" target="_blank" rel="noopener">x</a>
+          <a class="btn" href="https://www.linkedin.com/in/lesliebusick/" target="_blank" rel="noopener">linkedin</a>
+        </div>
+      </div>
     </div>
-    <div class="copy-row">© 2026 Leslie Busick · Made in NYC</div>
+  </section>
+
+  <div class="footer">
+    <span>&copy; 2026 Leslie Busick &middot; made in NYC</span>
+    <span><a href="#top">back to top &uarr;</a></span>
   </div>
-</section>
+</div>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
+  const links = [...document.querySelectorAll('nav.tabs a')];
+  const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        e.target.classList.add('in');
-        observer.unobserve(e.target);
+        links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  const navToggle = document.getElementById('nav-toggle');
-  const navLinks = document.getElementById('nav-links');
-  function setNav(open) {
-    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    navLinks.classList.toggle('open', open);
-  }
-  navToggle.addEventListener('click', () => {
-    setNav(navToggle.getAttribute('aria-expanded') !== 'true');
-  });
-  navLinks.addEventListener('click', (e) => {
-    if (e.target.tagName === 'A') setNav(false);
+  }, { rootMargin: '-35% 0px -55% 0px' });
+  links.forEach(a => {
+    const el = document.querySelector(a.getAttribute('href'));
+    if (el) io.observe(el);
   });
 </script>
 <script>

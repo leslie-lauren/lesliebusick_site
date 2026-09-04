@@ -1,70 +1,61 @@
 <!DOCTYPE html>
 <html><head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@500;600&display=swap');
-body { margin: 0; }
-.og {
-  width: 1200px; height: 630px;
-  background: #f7f2e9;
-  background-image:
-    radial-gradient(circle at 25% 30%, rgba(166, 61, 34, 0.06), transparent 50%),
-    radial-gradient(circle at 75% 70%, rgba(166, 61, 34, 0.05), transparent 50%);
-  font-family: 'Newsreader', Georgia, serif;
-  color: #0f0d0b;
-  padding: 70px 80px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-sizing: border-box;
-  position: relative;
-}
-.eyebrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 16px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: #d94f30;
-  font-weight: 600;
-}
-.name {
-  font-size: 200px;
-  font-weight: 400;
-  line-height: 0.9;
-  letter-spacing: -0.035em;
-  margin: 60px 0 30px;
-}
-.name em { font-style: italic; color: #d94f30; }
-.tagline {
-  font-size: 30px;
-  line-height: 1.4;
-  color: #2a2622;
-  max-width: 900px;
-}
-.tagline em { font-style: italic; color: #d94f30; }
-.footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 14px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #8a8270;
-  border-top: 1px solid #e2d8c0;
-  padding-top: 24px;
-}
-.footer .accent { color: #d94f30; font-weight: 600; }
+  :root{
+    --page:#dcd9f7; --pane:#eeecfd; --bar:#cfcbf6; --ink:#1c1a4e; --line:#2a2865;
+    --hi:#6b64ee; --paper:#f9f8ff;
+    --mono:"Space Mono",ui-monospace,"Courier New",monospace;
+    --pix:"VT323","Space Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--mono);color:var(--ink)}
+  .og{
+    width:1200px;height:630px;padding:34px;
+    background:var(--page);
+    background-image:radial-gradient(rgba(28,26,78,.14) 1.1px,transparent 1.2px);
+    background-size:18px 18px;
+  }
+  .win{height:100%;border:3px solid var(--line);background:var(--pane);box-shadow:10px 10px 0 var(--line);display:flex;flex-direction:column}
+  .bar{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;padding:12px 18px;background:var(--bar);border-bottom:3px solid var(--line);font-size:17px}
+  .lights{display:flex;gap:8px}
+  .lights i{width:15px;height:15px;border:2px solid var(--line);background:var(--paper)}
+  .body{flex:1;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;padding:0 46px}
+  .eyebrow{font-size:17px;letter-spacing:.1em;opacity:.85;margin-bottom:16px}
+  h1{font-family:var(--pix);font-size:128px;line-height:.84;margin:0 0 24px;font-weight:400}
+  h1 svg{width:40px;height:40px;color:var(--hi);vertical-align:.16em;margin-left:18px}
+  .tag{font-size:23px;line-height:1.45;max-width:34ch;margin:0}
+  .stamp{border:3px solid var(--line);background:var(--paper);box-shadow:6px 6px 0 var(--line);padding:26px 30px;text-align:center}
+  .stamp b{font-family:var(--pix);font-size:96px;line-height:.9;display:block;color:var(--hi)}
+  .stamp span{font-size:15px}
+  .foot{display:flex;justify-content:space-between;padding:14px 22px;background:var(--bar);border-top:3px solid var(--line);font-size:17px}
 </style></head>
 <body>
 <div class="og">
-  <div class="eyebrow">— FOUNDER · OPERATOR · ADVISOR · NYC</div>
-  <div>
-    <div class="name">Hi, I'm<br><em>Leslie</em>.</div>
-    <div class="tagline">2x founder, operator, advisor, and generally <em>just try to be helpful!</em></div>
-  </div>
-  <div class="footer">
-    <span>lesliebusick.com</span>
-    <span class="accent">leslie@lesliebusick.com</span>
+  <svg width="0" height="0" style="position:absolute">
+    <symbol id="star" viewBox="0 0 16 16"><path fill="currentColor" d="M7 1h2v4h1v1h1v1h4v2h-2v1h-1v1h-1v4H9v-2H8v-1H7v1H6v2H4v-4H3v-1H2V9H0V7h4V6h1V5h1V1z"/></symbol>
+  </svg>
+  <div class="win">
+    <div class="bar">
+      <div class="lights"><i></i><i></i><i></i></div>
+      <div style="text-align:center">welcome to lesliebusick.com</div>
+      <div>&mdash;</div>
+    </div>
+    <div class="body">
+      <div>
+        <div class="eyebrow">founder &middot; operator &middot; advisor &middot; nyc</div>
+        <h1>leslie<br>busick<svg shape-rendering="crispEdges"><use href="#star"/></svg></h1>
+        <p class="tag">2x founder, operator, advisor, and just trying to be useful where I can!</p>
+      </div>
+      <div class="stamp"><b>2x</b><span>healthcare founder</span></div>
+    </div>
+    <div class="foot">
+      <span>lesliebusick.com</span>
+      <span>busickleslie@gmail.com</span>
+    </div>
   </div>
 </div>
 </body></html>

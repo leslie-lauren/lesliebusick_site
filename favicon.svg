@@ -1,4 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#f7f2e9"/>
-  <text x="32" y="44" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-style="italic" font-weight="500" fill="#d94f30" text-anchor="middle" letter-spacing="-0.05em">lb.</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" shape-rendering="crispEdges">
+  <rect width="20" height="20" fill="#dcd9f7"/>
+  <path fill="#2a2865" d="M0 0h20v2H0zM0 18h20v2H0zM0 0h2v20H0zM18 0h2v20h-2z"/>
+  <g transform="translate(2,2)">
+    <path fill="#6b64ee" d="M7 1h2v4h1v1h1v1h4v2h-2v1h-1v1h-1v4H9v-2H8v-1H7v1H6v2H4v-4H3v-1H2V9H0V7h4V6h1V5h1V1z"/>
+  </g>
 </svg>

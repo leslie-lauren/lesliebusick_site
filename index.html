@@ -168,7 +168,8 @@
   /* contact */
   .contact{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
   .socials{display:flex;gap:10px;flex-wrap:wrap}
-  .footer{padding:18px 28px;font-size:11px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--bar);border-top:2px solid var(--line)}
+  .footer{padding:18px 28px;font-size:11px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;background:var(--bar);border-top:2px solid var(--line)}
+  .footer .egg{font-size:8.5px;letter-spacing:.1em;opacity:.42}
   .marquee{overflow:hidden;border-bottom:2px solid var(--line);background:var(--ink);color:var(--pane);font-family:var(--pix);font-size:22px;padding:4px 0}
   .marquee__track{display:flex;width:max-content;animation:scroll 34s linear infinite}
   .marquee__track>span{white-space:nowrap;flex:none}
@@ -483,6 +484,7 @@
 
   <div class="footer">
     <span>&copy; 2026 Leslie Busick &middot; made in NYC</span>
+    <span class="egg">analog core. Claude coded.</span>
     <span><a href="#top">back to top &uarr;</a></span>
   </div>
 </div>

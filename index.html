@@ -90,6 +90,8 @@
   .h2 { font-size: clamp(38px, 5vw, 60px); }
   .h3 { font-size: clamp(26px, 3vw, 34px); }
   .h2 em { font-style: italic; color: var(--cobalt); }
+  .sub { font-family: var(--display); font-style: italic; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.2; color: var(--ink-soft); margin-top: 14px; max-width: 30ch; text-wrap: balance; }
+  .on-blue .sub { color: var(--on-blue-soft); }
   .on-blue .h2 em { color: var(--butter); }
 
   .pill {
@@ -139,7 +141,8 @@
     padding-block: clamp(32px, 4vw, 64px) clamp(28px, 3vw, 52px);
     align-self: center; position: relative; z-index: 1;
   }
-  .hero-tag { font-size: clamp(15px, 1.15vw, 19px); line-height: 1.5; color: var(--ink); max-width: 34ch; margin-bottom: clamp(16px, 1.8vw, 30px); }
+  .hero-tag { font-size: clamp(15px, 1.15vw, 19px); line-height: 1.5; color: var(--ink); max-width: 40ch; margin-bottom: clamp(20px, 2vw, 34px); }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; }
   .hero-tag strong { font-weight: 600; }
   .name {
     font-family: var(--display-wide); font-weight: 400; color: var(--cobalt);
@@ -149,6 +152,10 @@
   .name .ch { display: inline-block; }
   .pill.explore { font-size: clamp(12px, .85vw, 14px); font-weight: 500; letter-spacing: .18em; text-transform: uppercase; padding: clamp(14px, 1.55vw, 26px) clamp(26px, 2.6vw, 44px); gap: 14px; }
   .pill.explore svg { width: 18px; height: 18px; }
+  .pill.solid { background: var(--cobalt); border-color: var(--cobalt); color: var(--paper); }
+  .pill.solid::before { background: var(--ink); }
+  .pill.solid:hover { border-color: var(--ink); color: var(--butter); }
+  #see-work:hover svg { transform: translateY(4px); }
   .hero-photo { position: relative; width: 100%; aspect-ratio: 877 / 799; }
   .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: right bottom; }
   .hero .sparkle.s1 { left: 41%; top: 12%; width: 30px; height: 30px; }
@@ -158,7 +165,7 @@
   @media (prefers-reduced-motion: no-preference) {
     .name .ch { opacity: 0; transform: translateY(.35em) rotate(4deg); animation: rise .8s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(.08s + var(--i) * .045s); }
     .hero-tag, .hero-cta { opacity: 0; animation: fadeup .8s ease forwards; }
-    .hero-tag { animation-delay: .1s; } .hero-cta { animation-delay: .75s; }
+    .hero-tag { animation-delay: .7s; } .hero-cta { animation-delay: .95s; }
     .hero-photo { opacity: 0; transform: translateX(40px); animation: slidein 1.1s cubic-bezier(.2,.7,.2,1) .25s forwards; }
   }
   @keyframes rise { to { opacity: 1; transform: none; } }
@@ -166,16 +173,18 @@
   @keyframes slidein { to { opacity: 1; transform: none; } }
 
   /* ---------- About ---------- */
-  .about .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
-  .about .h2 { font-size: clamp(34px, 4.2vw, 52px); }
-  .about .h2 .scrib { position: relative; display: inline-block; }
-  .about .h2 .scrib svg { position: absolute; left: -2%; right: -2%; bottom: -.28em; width: 104%; height: .5em; color: var(--cobalt); overflow: visible; }
-  .about .h2 .scrib path { stroke-dasharray: 420; stroke-dashoffset: 420; }
+  .about .h2 { margin-bottom: clamp(32px, 4vw, 52px); }
+  .versions { display: grid; grid-template-columns: 1fr 1.25fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .vlabel { font-size: 11.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--cobalt); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #ECE9DA; }
+  .short { font-family: var(--display); font-size: clamp(26px, 2.6vw, 34px); line-height: 1.2; }
+  .short .scrib { position: relative; display: inline-block; font-style: italic; color: var(--cobalt); }
+  .short .scrib svg { position: absolute; left: -2%; bottom: -.22em; width: 104%; height: .5em; color: var(--cobalt); overflow: visible; }
+  .short .scrib path { stroke-dasharray: 420; stroke-dashoffset: 420; }
   .in .scrib path { animation: draw 1.1s ease .5s forwards; }
   @keyframes draw { to { stroke-dashoffset: 0; } }
-  .about .long h3 { font-size: 13px; font-weight: 600; letter-spacing: .04em; margin-bottom: 14px; padding-top: 6px; }
-  .about .long p { color: var(--ink-soft); font-size: 15.5px; max-width: 52ch; }
+  .about .long p { color: var(--ink-soft); font-size: 15.5px; max-width: 58ch; }
   .about .long p + p { margin-top: 14px; }
+  .hl { font-family: var(--display); font-style: italic; font-weight: 400; color: var(--cobalt); font-size: 1.28em; line-height: 1.1; }
 
   /* ---------- Stats ---------- */
   .stats { background: var(--cobalt); color: var(--paper); }
@@ -225,10 +234,10 @@
   .card .role b { color: var(--ink); font-weight: 600; }
 
   /* ---------- Investing ---------- */
-  .invest .h2 { max-width: 16ch; margin-bottom: 40px; }
+  .invest .sub, .projects .intro, .writing .sub, .offline .sub { margin-bottom: 40px; }
 
   /* ---------- Projects ---------- */
-  .projects .intro { max-width: 62ch; color: var(--ink-soft); font-size: 15.5px; margin-top: 22px; margin-bottom: 40px; }
+  .projects .intro { max-width: 62ch; color: var(--ink-soft); font-size: 15.5px; margin-top: 18px; }
   .cards6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
   .pcard {
     background: var(--paper); border-radius: var(--radius); padding: 26px 24px 24px;
@@ -242,6 +251,9 @@
   .pcard:hover .pi { transform: translateY(-3px) rotate(-6deg) scale(1.06); }
   .pcard .h3 { font-size: 26px; }
   .pcard p { grid-column: 1 / -1; font-size: 14.5px; color: var(--ink-soft); margin-top: 8px; }
+  .pcard .cta { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--cobalt); }
+  .pcard .cta svg { width: 14px; height: 14px; transition: transform .22s ease; }
+  .pcard:hover .cta svg { transform: translateX(4px); }
   .pcard .status { position: absolute; top: 16px; right: 16px; font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); display: inline-flex; align-items: center; gap: 6px; }
   .pcard .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--cobalt); box-shadow: 0 0 0 0 currentColor; }
   .pcard .status.live::before { background: var(--green); animation: pulse 2.4s ease-out infinite; }
@@ -250,11 +262,10 @@
   @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(47,164,99,.55); } 70% { box-shadow: 0 0 0 7px rgba(47,164,99,0); } 100% { box-shadow: 0 0 0 0 rgba(47,164,99,0); } }
 
   /* ---------- Writing: composition notebook ---------- */
-  .writing .h2 { max-width: 22ch; margin-bottom: 44px; }
   .notebook { display: grid; grid-template-columns: 0.85fr 1.35fr; gap: clamp(28px, 4vw, 56px); align-items: start; }
   .cover { display: block; text-decoration: none; color: var(--paper); position: relative; }
-  .cover img { width: min(100%, 380px); border-radius: 10px 16px 16px 10px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.7), 0 2px 0 rgba(255,255,255,.15); transform: rotate(-3deg); transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s ease; }
-  .cover:hover img { transform: rotate(0deg) translateY(-6px); box-shadow: 0 40px 70px -30px rgba(0,0,0,.75), 0 2px 0 rgba(255,255,255,.15); }
+  .cover .comp { width: min(100%, 340px); height: auto; display: block; border-radius: 8px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.7), 0 2px 0 rgba(255,255,255,.15); transform: rotate(-3deg); transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s ease; }
+  .cover:hover .comp { transform: rotate(0deg) translateY(-6px); box-shadow: 0 40px 70px -30px rgba(0,0,0,.75), 0 2px 0 rgba(255,255,255,.15); }
   .cover .cap { display: flex; align-items: center; gap: 10px; margin-top: 26px; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--on-blue-soft); }
   .cover .cap svg { width: 16px; height: 16px; transition: transform .22s ease; }
   .cover:hover .cap svg { transform: translateX(4px); }
@@ -291,8 +302,7 @@
   .tab:hover { transform: rotate(180deg) translateY(-6px); }
 
   /* ---------- Offline ---------- */
-  .offline .h2 { margin-bottom: 36px; }
-  .offline .cards4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .offline .cards4 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
   .offline .card { padding: 24px 22px; }
   .offline .card .icon { width: 36px; height: 36px; }
   .offline .card .h3 { font-size: 24px; }
@@ -346,7 +356,7 @@
     .career .grid { grid-template-columns: 1fr; }
     .career .head { position: static; }
     .notebook { grid-template-columns: 1fr; }
-    .cover img { width: min(100%, 300px); }
+    .cover .comp { width: min(100%, 280px); }
     .tabs { display: none; }
   }
   @media (max-width: 760px) {
@@ -360,7 +370,7 @@
     .hero-copy { order: 2; padding-left: var(--gutter); padding-right: var(--gutter); padding-block: 8px 52px; }
     .name { font-size: clamp(64px, 20vw, 110px); }
     .hero .sparkle.s1 { left: 6%; top: 6%; }
-    .about .grid { grid-template-columns: 1fr; }
+    .versions { grid-template-columns: 1fr; }
     .stats .wrap { grid-template-columns: repeat(2, 1fr); }
     .stat { padding-block: 22px; }
     .stat:nth-child(3) { border-left: 0; padding-left: 0; }
@@ -403,9 +413,12 @@
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-copy">
-        <p class="hero-tag"><strong>2x founder, operator, advisor,</strong> and just trying to be useful where I can!</p>
         <h1 class="name" id="name">Leslie<br>Busick</h1>
-        <div class="hero-cta"><a class="pill explore" id="explore" href="#about">Explore <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div>
+        <p class="hero-tag">2x founder, operator, advisor, <strong>and just trying to be useful where I can!</strong></p>
+        <div class="hero-cta">
+          <a class="pill explore solid" href="mailto:busickleslie@gmail.com">Contact me <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+          <a class="pill explore" id="see-work" href="#work">See my work <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v11M4 9l4 4 4-4"/></svg></a>
+        </div>
       </div>
       <div class="hero-photo">
         <picture>
@@ -420,16 +433,18 @@
 
   <!-- About -->
   <section class="about band paper" id="about">
-    <div class="wrap grid reveal">
-      <div>
-        <p class="eyebrow">About me</p>
-        <h2 class="display h2">The short version: 2x healthcare founder and former <em class="scrib">“finance girly.”<svg viewBox="0 0 300 30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" preserveAspectRatio="none"><path d="M4 18c60-8 120-10 180-8 40 1 70 4 112 6-70-2-140 0-210 8"/></svg></em></h2>
-      </div>
-      <div class="long">
-        <h3>The slightly longer version:</h3>
-        <p>I started in finance, then left to start my first company at 26: a DTC women's health platform. It didn't work, but we took the lessons and applied them to a second company, a B2B SaaS platform offering white-label AI and telehealth to clinics. Both were crazy rides. I had a lot of fun, suffered even more, and learned a few things along the way.</p>
-        <p>Now I advise, angel invest, build things on the side, and try to be useful to early-stage founders. Originally from California, currently in New York.</p>
-        <p>Here's a look at what I've done, what I'm working on, and how to be useful in each other's orbits.</p>
+    <div class="wrap">
+      <h2 class="display h2 reveal">About me</h2>
+      <div class="versions reveal">
+        <div class="version">
+          <p class="vlabel">The short version</p>
+          <p class="short">Hi, I'm Leslie. 2x healthcare founder and former <em class="scrib">“finance girly,”<svg viewBox="0 0 300 30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" preserveAspectRatio="none"><path d="M4 18c60-8 120-10 180-8 40 1 70 4 112 6-70-2-140 0-210 8"/></svg></em> originally from CA and currently in NYC.</p>
+        </div>
+        <div class="version long">
+          <p class="vlabel">The longer version</p>
+          <p>I started in finance, then left to start my first company at age 26: a DTC women's health platform. It didn't work, but we took the lessons and applied them to a second company, a B2B SaaS platform offering white-label AI and telehealth to clinics. Both were crazy rides. <strong class="hl">I had a lot of fun, suffered even more, and learned a few things along the way.</strong></p>
+          <p>Now I advise, angel invest, build things on the side, and try to be useful to early stage founders.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -437,10 +452,10 @@
   <!-- Stats -->
   <section class="stats" aria-label="By the numbers">
     <div class="wrap reveal" id="stats">
-      <div class="stat"><div class="num" data-count="2">2</div><div class="lbl">Founderships</div></div>
+      <div class="stat"><div class="num" data-count="2">2</div><div class="lbl">Companies founded</div></div>
       <div class="stat"><div class="num" data-count="10" data-prefix="$" data-suffix="M">$10M</div><div class="lbl">Capital raised</div></div>
-      <div class="stat"><div class="num" data-count="2" data-prefix="$" data-suffix="M">$2M</div><div class="lbl">Revenue at peak</div></div>
-      <div class="stat"><div class="num" data-count="6" data-suffix="+">6+</div><div class="lbl">Years operating</div></div>
+      <div class="stat"><div class="num" data-count="2" data-prefix="$" data-suffix="M">$2M</div><div class="lbl">Platform sales in 6 mo</div></div>
+      <div class="stat"><div class="num" data-count="7">7</div><div class="lbl">Years operating</div></div>
     </div>
   </section>
 
@@ -498,8 +513,8 @@
   <section class="invest band blue on-blue" id="investing">
     <div class="wrap">
       <div class="reveal">
-        <p class="eyebrow">Investing + advising</p>
-        <h2 class="display h2">Some tech, some AI, some neither. All early stage.</h2>
+        <h2 class="display h2">Investing + advising</h2>
+        <p class="sub">Some tech, some AI, some neither. All early stage.</p>
       </div>
       <div class="cards3 reveal">
         <article class="card tilt">
@@ -528,8 +543,8 @@
   <section class="projects band butter" id="projects">
     <div class="wrap">
       <div class="reveal">
-        <p class="eyebrow">Side projects + tinkering (always)</p>
-        <h2 class="display h2">I ship constantly, including outside of work, because I can't not.</h2>
+        <h2 class="display h2">Side projects + tinkering (always)</h2>
+        <p class="sub">I ship constantly, including outside of work, because I can't not.</p>
         <p class="intro">I genuinely love solving problems and tend to build for the ones me or the people around me actually feel. These are some things I've built, am building, or am thinking about. Mostly for myself or friends. Poke around, feedback welcome.</p>
       </div>
       <div class="cards6 reveal">
@@ -538,36 +553,42 @@
           <div class="pi"><img src="images/icons/fabled.png" alt="" width="192" height="192" loading="lazy"></div>
           <h3 class="display h3">Fabled</h3>
           <p>Whimsy AI book club that tells you your reading aura, surfaces new books, and generates discussion questions.</p>
+          <span class="cta">Join Fabled <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
         </a>
         <a class="pcard tilt" href="https://getunhinged.ai" target="_blank" rel="noopener">
           <span class="status beta">Private beta</span>
           <div class="pi"><img src="images/icons/unhinged.png" alt="" width="192" height="192" loading="lazy"></div>
           <h3 class="display h3">Unhinged</h3>
           <p>AI compatibility layer and matchmaker that thinks about fit the way a smart friend would, and surfaces matches the swipe apps miss.</p>
+          <span class="cta">Get Unhinged <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
         </a>
         <a class="pcard tilt" href="https://github.com/leslie-lauren/agent-office" target="_blank" rel="noopener">
           <span class="status oss">Open source</span>
           <div class="pi"><img src="images/icons/agent-office.png" alt="" width="192" height="192" loading="lazy"></div>
           <h3 class="display h3">Agent Office</h3>
           <p>Pixel-art dashboard where my Claude agents show up as little characters working in a tiny office, so I can see what they're doing at a glance.</p>
+          <span class="cta">Get an office <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
         </a>
         <a class="pcard tilt" href="https://mytrova.vercel.app" target="_blank" rel="noopener">
           <span class="status live">Live</span>
           <div class="pi"><img src="images/icons/trova.png" alt="" width="192" height="192" loading="lazy"></div>
           <h3 class="display h3">Trova</h3>
           <p>Wishlist app that saves items from any store in one place, watches for sales, and hunts down coupon codes before you buy.</p>
+          <span class="cta">Try Trova <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
         </a>
         <a class="pcard tilt" href="https://rummikub-snowy.vercel.app" target="_blank" rel="noopener">
           <span class="status live">Live</span>
           <div class="pi"><img src="images/icons/rummikub.png" alt="" width="192" height="192" loading="lazy"></div>
           <h3 class="display h3">Rummikub</h3>
           <p>My family's favorite game, on the go. The classic tile game rebuilt for the browser in a single HTML file so you can play anywhere.</p>
+          <span class="cta">Play a round <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
         </a>
         <a class="pcard tilt" href="mailto:busickleslie@gmail.com?subject=Orbit access request">
           <span class="status tool">Personal tool</span>
           <div class="pi"><img src="images/orbit_splash.svg" alt="" width="200" height="200" loading="lazy"></div>
           <h3 class="display h3">Orbit</h3>
           <p>Agentic personal CRM built on Airtable plus the Claude API, to manage relationships the way a great chief of staff would.</p>
+          <span class="cta">Request access <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
         </a>
       </div>
     </div>
@@ -577,12 +598,44 @@
   <section class="writing band blue on-blue" id="writing">
     <div class="wrap">
       <div class="reveal">
-        <p class="eyebrow">Writing + thinking</p>
-        <h2 class="display h2">Essays on how I think, operating, building, and the things I've gotten wrong.</h2>
+        <h2 class="display h2">Writing + thinking</h2>
+        <p class="sub">Essays on how I think, operating, building, and the things I've gotten wrong.</p>
       </div>
       <div class="notebook reveal">
-        <a class="cover" href="https://lesliethethird.substack.com" target="_blank" rel="noopener">
-          <img src="images/notebook-cover.jpg" alt="Leslie III, a composition notebook. The Substack." width="720" height="716" loading="lazy">
+        <a class="cover" href="https://lesliethethird.substack.com" target="_blank" rel="noopener" aria-label="Leslie III on Substack">
+          <svg class="comp" viewBox="0 0 300 390" role="img" aria-label="A black and white composition notebook labelled Leslie III">
+            <defs>
+              <filter id="marble" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.055" numOctaves="4" seed="11" result="n"/>
+                <feColorMatrix in="n" type="saturate" values="0" result="g"/>
+                <feComponentTransfer in="g">
+                  <feFuncR type="discrete" tableValues="0 0 0 0 0 0 1 1 1 1 1"/>
+                  <feFuncG type="discrete" tableValues="0 0 0 0 0 0 1 1 1 1 1"/>
+                  <feFuncB type="discrete" tableValues="0 0 0 0 0 0 1 1 1 1 1"/>
+                  <feFuncA type="table" tableValues="1 1"/>
+                </feComponentTransfer>
+              </filter>
+              <clipPath id="nb"><rect x="0" y="0" width="300" height="390" rx="8"/></clipPath>
+            </defs>
+            <g clip-path="url(#nb)">
+              <rect width="300" height="390" fill="#F4F1E6"/>
+              <rect width="300" height="390" filter="url(#marble)"/>
+              <rect x="0" y="0" width="34" height="390" fill="#111"/>
+              <rect x="34" y="0" width="3" height="390" fill="#F4F1E6" opacity=".55"/>
+              <rect x="12" y="0" width="1" height="390" fill="#444" opacity=".5"/>
+              <rect x="22" y="0" width="1" height="390" fill="#444" opacity=".5"/>
+            </g>
+            <g>
+              <rect x="62" y="122" width="196" height="122" rx="14" fill="#FFFDF7" stroke="#111" stroke-width="3"/>
+              <rect x="70" y="130" width="180" height="106" rx="10" fill="none" stroke="#111" stroke-width="1.2"/>
+              <line x1="86" y1="162" x2="234" y2="162" stroke="#111" stroke-width=".8" opacity=".45"/>
+              <line x1="86" y1="184" x2="234" y2="184" stroke="#111" stroke-width=".8" opacity=".45"/>
+              <line x1="86" y1="206" x2="234" y2="206" stroke="#111" stroke-width=".8" opacity=".45"/>
+              <text x="158" y="192" text-anchor="middle" font-family="Caveat, 'Comic Sans MS', cursive" font-weight="700" font-size="46" fill="#111" transform="rotate(-4 158 192)">Leslie III</text>
+              <path d="M96 214c30-4 70-6 122-4" stroke="#111" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+              <path d="M226 226c-2-5-9-6-11-1-2-4-9-3-9 2 0 6 10 10 10 10s10-5 10-11z" fill="#111"/>
+            </g>
+          </svg>
           <span class="cap"><b>Leslie III</b> on Substack <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
         </a>
         <div class="page">
@@ -616,8 +669,8 @@
   <section class="offline band butter" id="offline">
     <div class="wrap">
       <div class="reveal">
-        <p class="eyebrow">Offline, mostly</p>
-        <h2 class="display h2">Other things I love</h2>
+        <h2 class="display h2">Offline, mostly</h2>
+        <p class="sub">Other things I love.</p>
       </div>
       <div class="cards4 reveal">
         <article class="card tilt">
@@ -629,11 +682,6 @@
           <div class="icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 36V10l20-4v26"/><circle cx="12" cy="36" r="6"/><circle cx="32" cy="32" r="6"/><path d="M18 18l20-4"/></svg></div>
           <h3 class="display h3">Dancing</h3>
           <p>Competitive bronze pro-am ballroom dancer.</p>
-        </article>
-        <article class="card tilt">
-          <div class="icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 6v14M12 6v8M20 6v8M16 20v22"/><path d="M32 6c-4 4-4 12 0 16v20"/></svg></div>
-          <h3 class="display h3">Cooking</h3>
-          <p>Mostly healthy, with the occasional baked sweet treat.</p>
         </article>
         <article class="card tilt">
           <div class="icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 30c4-4 8-4 12 0s8 4 12 0 8-4 12 0"/><path d="M6 38c4-4 8-4 12 0s8 4 12 0 8-4 12 0"/><path d="M14 22c2-10 10-16 22-16-2 8-8 14-22 16z"/></svg></div>
@@ -728,7 +776,7 @@
   }
 
   // Sparkle burst on the hero button
-  const explore = document.getElementById('explore');
+  const explore = document.getElementById('see-work');
   explore.addEventListener('click', () => {
     if (reduce) return;
     const r = explore.getBoundingClientRect();

@@ -215,7 +215,8 @@
   .entry p { font-size: 15px; color: var(--ink-soft); }
 
   /* ---------- Cards (shared) ---------- */
-  .cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: stretch; }
+  .cards3 .card > p:not(.role) { flex: 1; }
   .card {
     background: var(--paper); color: var(--ink); border-radius: var(--radius);
     padding: 28px 26px 26px; display: flex; flex-direction: column; gap: 12px;
@@ -442,16 +443,17 @@
   <section class="about band paper" id="about">
     <div class="wrap grid">
       <div class="head reveal">
-        <h2 class="display h2">About Me</h2>
+        <h2 class="display h2">Hi, I'm Leslie</h2>
       </div>
       <div class="versions reveal">
         <div class="version">
           <p class="vlabel">The Short Version</p>
-          <p>Hi, I'm Leslie. 2x healthcare founder and former “finance girly,” originally from CA and currently in NYC.</p>
+          <p>I'm a 2x healthcare founder and former “finance girly,” originally from the Bay Area and currently based in NYC.</p>
         </div>
         <div class="version">
           <p class="vlabel">The Longer Version</p>
-          <p>I started in finance, then left to start my first company at age 26: a DTC women's health platform. It didn't work, but we took the lessons and applied them to a second company, a B2B SaaS platform offering white-label AI and telehealth to clinics. Both were crazy rides. <strong class="hl">I had a lot of fun, suffered even more, and learned a few things along the way.</strong></p>
+          <p>I started my career in finance, then left to start my first company at age 26: a DTC women's health platform. We ultimately didn't find product market fit, but we took the lessons and applied them to a second company, a vertical AI application layer for medical practices.</p>
+          <p>Both were crazy rides. <strong class="hl">I had a lot of fun, suffered even more, and learned a few things along the way.</strong></p>
           <p>Now I advise, angel invest, build things on the side, and try to be useful to early stage founders.</p>
         </div>
       </div>
@@ -482,10 +484,11 @@
             <h3 class="display h3">Camu</h3>
             <div class="role">Co-Founder</div>
             <ul>
-              <li>B2B SaaS providing white-label AI and telehealth to clinics</li>
-              <li>0 → $2M+ in sales in 6 months</li>
-              <li>Raised from top VCs across rounds that closed in a couple of days</li>
-              <li>Landed large enterprise contracts</li>
+              <li>Vertical AI application layer for healthcare, automating clinical and operational workflows for medical practices.</li>
+              <li>0 → $2M+ in 6 months.</li>
+              <li>Hired and led a team of 10 people (mostly engineers).</li>
+              <li>Raised oversubscribed rounds from top VCs across rounds that closed in just a few days.</li>
+              <li>Landed large enterprise contracts.</li>
             </ul>
           </div>
         </div>
@@ -496,8 +499,9 @@
             <h3 class="display h3">Odela Health</h3>
             <div class="role">Founder</div>
             <ul>
-              <li>DTC women's health platform. Think Hims, but for menopause and sexual health</li>
-              <li>Didn't find PMF. What we learned became the foundation for the next company</li>
+              <li>DTC women's health platform. Think Hims, but for menopause and sexual health.</li>
+              <li>Treated over 1,000 patients, hired and led a team of 20+ people, and raised from top VCs.</li>
+              <li>Didn't find PMF. What we learned became the foundation for Camu.</li>
             </ul>
           </div>
         </div>
@@ -508,8 +512,8 @@
             <h3 class="display h3">Finance Days</h3>
             <div class="role">Excel Monkey</div>
             <ul>
-              <li>Generalist @ KKR</li>
-              <li>Investment Banking TMT M&amp;A @ Centerview</li>
+              <li>Generalist @ KKR.</li>
+              <li>Investment Banking TMT M&amp;A @ Centerview.</li>
             </ul>
           </div>
         </div>

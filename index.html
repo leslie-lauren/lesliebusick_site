@@ -194,7 +194,7 @@
 
   /* ---------- Stats ---------- */
   .stats { background: var(--cobalt); color: var(--paper); }
-  .stats .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stats .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
   .stat { padding-block: 34px; padding-inline: 16px; border-left: 1px solid rgba(255,255,255,.22); text-align: center; }
   .stat:first-child { border-left: 0; }
   .stat .num { font-family: var(--display); font-size: clamp(38px, 4.4vw, 56px); line-height: 1; font-variant-numeric: tabular-nums; }
@@ -397,6 +397,9 @@
     .about .grid { grid-template-columns: 1fr; }
     .about .head { position: static; }
     .stats .wrap { grid-template-columns: repeat(2, 1fr); }
+    /* Three stats in two columns: the last one spans the row instead of sitting orphaned.
+       Its borders are already handled by the two rules below. */
+    .stat:last-child { grid-column: 1 / -1; }
     .stat { padding-block: 22px; }
     .stat:nth-child(3) { border-left: 0; }
     .stat:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.22); }
@@ -505,9 +508,8 @@
   <section class="stats" aria-label="By the numbers">
     <div class="wrap reveal" id="stats">
       <div class="stat"><div class="num" data-count="2">2</div><div class="lbl">Companies founded</div></div>
-      <div class="stat"><div class="num" data-count="10" data-prefix="$" data-suffix="M">$10M</div><div class="lbl">Capital raised</div></div>
-      <div class="stat"><div class="num" data-count="2" data-prefix="$" data-suffix="M">$2M</div><div class="lbl">Platform sales in 6 mo</div></div>
-      <div class="stat"><div class="num" data-count="7">7</div><div class="lbl">Years operating</div></div>
+      <div class="stat"><div class="num" data-count="10" data-prefix="~$" data-suffix="M">~$10M</div><div class="lbl">Capital raised</div></div>
+      <div class="stat"><div class="num" data-count="2" data-prefix="$" data-suffix="M+">$2M+</div><div class="lbl">Platform sales in 6 mo</div></div>
     </div>
   </section>
 
@@ -541,7 +543,7 @@
             <div class="role">Founder</div>
             <ul>
               <li>DTC women's health platform. Think Hims, but for menopause and sexual health.</li>
-              <li>Treated over 1,000 patients, hired and led a team of 20+ people, and raised from top VCs.</li>
+              <li>Treated ~1,000 patients, hired and led a team of ~20 people, and raised from top VCs.</li>
               <li>Didn't find PMF. What we learned became the foundation for Camu.</li>
             </ul>
           </div>

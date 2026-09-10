@@ -313,7 +313,7 @@
 
   /* ---------- Contact + footer ---------- */
   .contact { overflow: hidden; padding-bottom: 0; padding-top: clamp(40px, 5vw, 72px); }
-  .contact-grid { display: grid; grid-template-columns: 1.1fr 1.05fr .8fr; gap: clamp(16px, 2.5vw, 40px); align-items: end; }
+  .contact-grid { display: grid; grid-template-columns: 1.05fr .95fr 1fr; gap: clamp(16px, 2vw, 32px); align-items: end; }
   .contact .copy { align-self: center; padding-bottom: clamp(32px, 4vw, 56px); }
   .talk { font-size: clamp(56px, 6.6vw, 96px); color: var(--cobalt); line-height: 1; margin-bottom: 26px; }
   .talk .ul { position: relative; display: inline-block; }
@@ -325,9 +325,9 @@
   .contact .smile { position: relative; align-self: end; height: clamp(340px, 34vw, 520px); }
   .contact .smile img { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%) translateY(30px); height: 100%; width: auto; max-width: none; opacity: 0; transition: transform 1s cubic-bezier(.2,.7,.2,1), opacity .8s ease; }
   .contact.in .smile img { transform: translateX(-50%); opacity: 1; }
-  .contact .smile .note { position: absolute; right: -26%; top: 16%; font-family: var(--hand); font-weight: 700; font-size: clamp(22px, 2vw, 30px); line-height: 1.05; color: var(--cobalt); text-align: center; transform: rotate(-12deg); }
+  .contact .smile .note { position: absolute; right: -24%; top: 14%; font-family: var(--hand); font-weight: 700; font-size: clamp(22px, 2vw, 30px); line-height: 1.05; color: var(--cobalt); text-align: center; transform: rotate(-12deg); }
   .contact .smile .note svg { display: block; width: 30px; height: 28px; margin: 6px auto 0; color: var(--cobalt); }
-  .contact .side { align-self: center; padding-bottom: clamp(32px, 4vw, 56px); }
+  .contact .side { align-self: center; padding-bottom: clamp(32px, 4vw, 56px); padding-left: clamp(72px, 9vw, 150px); }
   .brand2 { font-size: clamp(13px, 1vw, 17px); font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); margin-bottom: 26px; }
   .social { display: flex; gap: clamp(22px, 2.4vw, 36px); }
   .social a { display: block; width: 22px; height: 22px; color: var(--ink); transition: transform .3s cubic-bezier(.3,1.6,.4,1), color .2s ease; }
@@ -398,7 +398,7 @@
     .page { padding: 40px 22px 32px 92px; }
     .essay .t { font-size: 26px; }
     .contact-grid { grid-template-columns: 1fr; gap: 28px; }
-    .contact .copy, .contact .side { padding-bottom: 0; }
+    .contact .copy, .contact .side { padding-bottom: 0; padding-left: 0; }
     .contact .side { order: 2; }
     .contact .smile { order: 3; height: 320px; width: 100%; margin-top: 12px; }
     .contact .smile .note { right: 2%; top: 4%; }

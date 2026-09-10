@@ -376,9 +376,9 @@
     .offline .cards4 { grid-template-columns: repeat(2, 1fr); }
     .career .grid { grid-template-columns: 1fr; }
     .career .head { position: static; }
-    .notebook { grid-template-columns: 1fr; gap: 28px; }
-    .cover { order: 2; }
-    .book { width: min(100%, 260px); }
+    .notebook { grid-template-columns: 92px 1fr; gap: 14px; align-items: start; }
+    .book { width: 92px; transform: rotate(-3deg); }
+    .cover .cap { display: none; }
   }
   @media (max-width: 760px) {
     .links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--butter); border-bottom: 1px solid var(--rule); padding: 8px 0; }
@@ -387,11 +387,11 @@
     .links a::after { display: none; }
     .nav-toggle { display: inline-block; }
     .hero-inner { grid-template-columns: 1fr; }
-    .hero-photo { order: 1; width: 92%; margin-left: auto; }
+    .hero-photo { order: 1; width: 84%; margin-inline: auto; }
     .hero-copy { order: 2; padding-left: var(--gutter); padding-right: var(--gutter); padding-block: 8px 52px; }
     .name { font-size: clamp(64px, 20vw, 110px); }
-    .hero .sparkle.s1 { left: 1.2%; top: 9%; width: 22px; height: 22px; }
-    .hero .sparkle.s2 { left: 1.6%; bottom: auto; top: calc(92vw * 0.911 * 0.62); width: 18px; height: 18px; }
+    .hero .sparkle.s1 { left: 1.8%; top: 9%; width: 22px; height: 22px; }
+    .hero .sparkle.s2 { left: auto; right: 2%; bottom: auto; top: calc(84vw * 0.911 * 0.6); width: 20px; height: 20px; }
     .about .grid { grid-template-columns: 1fr; }
     .about .head { position: static; }
     .stats .wrap { grid-template-columns: repeat(2, 1fr); }
@@ -413,23 +413,28 @@
     .offline .cards4 .card .icon { width: 30px; height: 30px; margin: 0; grid-row: span 2; }
     .offline .cards4 .card .h3 { font-size: 21px; } .offline .cards4 .card p { font-size: 13.5px; }
     .swipe-hint { display: block; }
-    .page { padding: 40px 22px 32px 84px; }
-    .essay .t { font-size: 26px; }
-    .fmock { aspect-ratio: auto; padding: 0 var(--gutter) 0; display: grid; gap: 22px; }
+    .page { padding: 26px 14px 22px 44px; line-height: 28px; border-radius: 4px 10px 10px 4px; background: linear-gradient(90deg, transparent 0 28px, var(--rule-red) 28px 29.5px, transparent 29.5px 33px, var(--rule-red) 33px 34.5px, transparent 34.5px), repeating-linear-gradient(to bottom, transparent 0 27px, var(--rule-blue) 27px 28px), var(--page); }
+    .page::before { width: 12px; }
+    .essay { line-height: 28px; margin-bottom: 28px; }
+    .essay .t { font-size: 22px; line-height: 28px; }
+    .essay .m { line-height: 28px; font-size: 10px; }
+    .fmock { aspect-ratio: auto; padding: 36px var(--gutter) 0; display: grid; grid-template-columns: 1.1fr .9fr; grid-template-areas: "talk photo" "blurb photo" "pill photo" "side side"; gap: 16px 14px; align-items: center; }
+    .talk { grid-area: talk; } .blurb { grid-area: blurb; } .fpill { grid-area: pill; } .fphoto { grid-area: photo; } .side { grid-area: side; }
     .blurb br { display: none; }
     .fmock > * { position: static; }
-    .talk { font-size: 64px; white-space: normal; }
-    .blurb { font-size: 16px; line-height: 1.5; white-space: normal; }
-    .fpill { height: auto; padding: 14px 26px; font-size: 12px; gap: 12px; justify-self: start; }
+    .talk { font-size: clamp(38px, 11.5vw, 50px); white-space: normal; align-self: end; }
+    .blurb { font-size: 14px; line-height: 1.45; white-space: normal; }
+    .fpill { height: auto; padding: 12px 20px; font-size: 11px; gap: 10px; justify-self: start; align-self: start; }
     .fpill svg { width: 16px; height: 16px; }
-    .side { width: auto; order: 3; margin: 14px calc(-1 * var(--gutter)) 0; padding: 36px var(--gutter) 40px; background: var(--cobalt); color: var(--paper); }
+    .side { width: auto; margin: 10px calc(-1 * var(--gutter)) 0; padding: 36px var(--gutter) 40px; background: var(--cobalt); color: var(--paper); }
     .side .brand2, .side .motto, .side .social a { color: var(--paper); }
     .side .social a:hover { color: var(--butter); }
     .side-rule { border-top-color: rgba(255,255,255,.4); }
     .brand2 { font-size: 13px; margin-bottom: 18px; }
     .social { gap: 26px; } .social a { width: 22px; height: 22px; }
     .side-rule { margin: 26px 0 18px; } .motto { font-size: 11px; line-height: 2; }
-    .fphoto { width: 80%; height: 300px; margin: 28px auto 0; order: -1; }
+    .fphoto { width: 100%; height: 100%; min-height: 240px; margin: 0; align-self: end; }
+    .fphoto img { object-fit: cover; object-position: center top; }
   }
 </style>
 </head>

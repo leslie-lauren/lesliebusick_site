@@ -310,29 +310,40 @@
   @keyframes wiggle { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-12deg) scale(1.1); } 55% { transform: rotate(10deg) scale(1.1); } 80% { transform: rotate(-4deg); } }
 
   /* ---------- Contact + footer ---------- */
-  .contact { overflow: hidden; padding-bottom: 0; }
-  .contact-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(24px, 4vw, 56px); align-items: end; }
-  .contact .copy { padding-bottom: clamp(40px, 5vw, 64px); }
-  .contact .h2 { max-width: 20ch; margin-bottom: 34px; }
-  .social { display: flex; gap: clamp(26px, 3vw, 44px); margin-top: clamp(40px, 4vw, 56px); }
-  .social a { display: block; width: 26px; height: 26px; color: var(--paper); transition: transform .3s cubic-bezier(.3,1.6,.4,1), color .2s ease; }
+  .contact { overflow: hidden; padding-bottom: 0; padding-top: clamp(40px, 5vw, 72px); }
+  .contact-grid { display: grid; grid-template-columns: 1.1fr 1.05fr .8fr; gap: clamp(16px, 2.5vw, 40px); align-items: end; }
+  .contact .copy { align-self: center; padding-bottom: clamp(32px, 4vw, 56px); }
+  .talk { font-size: clamp(56px, 6.6vw, 96px); color: var(--cobalt); line-height: 1; margin-bottom: 26px; }
+  .talk .ul { position: relative; display: inline-block; }
+  .talk .ul svg { position: absolute; left: 0; bottom: -.16em; width: 100%; height: .22em; color: var(--cobalt); overflow: visible; }
+  .talk .ul path { stroke-dasharray: 220; stroke-dashoffset: 220; }
+  .contact.in .talk .ul path:nth-child(1) { animation: draw .7s ease .5s forwards; }
+  .contact.in .talk .ul path:nth-child(2) { animation: draw .6s ease .9s forwards; }
+  .blurb { font-size: clamp(16px, 1.2vw, 19px); line-height: 1.5; color: var(--ink); max-width: 44ch; margin-bottom: 30px; }
+  .contact .smile { position: relative; align-self: end; height: clamp(340px, 34vw, 520px); }
+  .contact .smile img { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%) translateY(30px); height: 100%; width: auto; max-width: none; opacity: 0; transition: transform 1s cubic-bezier(.2,.7,.2,1), opacity .8s ease; }
+  .contact.in .smile img { transform: translateX(-50%); opacity: 1; }
+  .contact .smile .note { position: absolute; right: -26%; top: 16%; font-family: var(--hand); font-weight: 700; font-size: clamp(22px, 2vw, 30px); line-height: 1.05; color: var(--cobalt); text-align: center; transform: rotate(-12deg); }
+  .contact .smile .note svg { display: block; width: 30px; height: 28px; margin: 6px auto 0; color: var(--cobalt); }
+  .contact .side { align-self: center; padding-bottom: clamp(32px, 4vw, 56px); }
+  .brand2 { font-size: clamp(13px, 1vw, 17px); font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); margin-bottom: 26px; }
+  .social { display: flex; gap: clamp(22px, 2.4vw, 36px); }
+  .social a { display: block; width: 22px; height: 22px; color: var(--ink); transition: transform .3s cubic-bezier(.3,1.6,.4,1), color .2s ease; }
   .social a svg { width: 100%; height: 100%; display: block; }
-  .social a:hover { transform: translateY(-4px) rotate(-6deg); color: var(--butter); }
-  .contact .smile { position: relative; align-self: end; height: clamp(320px, 32vw, 500px); }
-  .contact .smile img { position: absolute; bottom: 0; right: 4%; height: 100%; width: auto; max-width: none; filter: drop-shadow(0 20px 30px rgba(0,0,0,.25)); transform: translateY(30px); opacity: 0; transition: transform 1s cubic-bezier(.2,.7,.2,1), opacity .8s ease; }
-  .contact.in .smile img { transform: none; opacity: 1; }
-  .contact .smile .rays { position: absolute; right: -2%; top: 34%; width: clamp(34px, 3.4vw, 56px); color: var(--paper); }
-  .contact .smile .rays svg { width: 100%; height: auto; display: block; }
-  .contact .smile .rays path { stroke-dasharray: 80; stroke-dashoffset: 80; }
-  .contact.in .smile .rays path { animation: draw .5s ease forwards; }
-  .contact.in .smile .rays path:nth-child(1) { animation-delay: 1s; } .contact.in .smile .rays path:nth-child(2) { animation-delay: 1.15s; } .contact.in .smile .rays path:nth-child(3) { animation-delay: 1.3s; }
-  .contact .sparkle.s1 { left: 52%; top: 12%; width: 34px; height: 34px; }
-  .foot { border-top: 1.5px solid rgba(255,255,255,.85); padding-block: 30px 34px; display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; justify-content: space-between; font-size: 14px; color: var(--paper); }
-  .foot .motto { font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+  .social a:hover { transform: translateY(-4px) rotate(-6deg); color: var(--cobalt); }
+  .side-rule { border: 0; border-top: 1px solid rgba(20,22,31,.35); margin: 34px 0 26px; }
+  .motto { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); line-height: 2; }
 
   /* ---------- Sparkle burst ---------- */
   .burst { position: fixed; pointer-events: none; z-index: 50; color: var(--cobalt); font-size: 18px; line-height: 1; animation: fly .8s cubic-bezier(.2,.7,.3,1) forwards; }
   @keyframes fly { to { transform: translate(var(--dx), var(--dy)) rotate(var(--r)) scale(.2); opacity: 0; } }
+
+  /* static render flag (?static=1) for screenshots */
+  html.static *, html.static *::before, html.static *::after { animation: none !important; transition: none !important; }
+  html.static .reveal, html.static .contact .wrap, html.static .name .ch, html.static .hero-tag, html.static .hero-cta, html.static .hero-photo { opacity: 1 !important; transform: none !important; }
+  html.static .entry .dot, html.static .entry .dotcol::before { transform: none !important; }
+  html.static .scrib path, html.static .talk .ul path { stroke-dashoffset: 0 !important; }
+  html.static .contact .smile img { opacity: 1 !important; transform: translateX(-50%) !important; }
 
   /* ---------- Reveal ---------- */
   .reveal { opacity: 1; transform: none; }
@@ -347,8 +358,8 @@
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
     .entry .dot, .entry .dotcol::before { transform: none !important; }
-    .contact .smile img { opacity: 1 !important; transform: none !important; }
-    .scrib path, .rays path { stroke-dashoffset: 0 !important; }
+    .contact .smile img { opacity: 1 !important; transform: translateX(-50%) !important; }
+    .scrib path, .talk .ul path { stroke-dashoffset: 0 !important; }
   }
 
   /* ---------- Responsive ---------- */
@@ -384,12 +395,11 @@
     .cards3, .cards6, .offline .cards4 { grid-template-columns: 1fr; }
     .page { padding: 40px 22px 32px 92px; }
     .essay .t { font-size: 26px; }
-    .contact-grid { grid-template-columns: 1fr; }
-    .contact .copy { padding-bottom: 32px; }
-    .contact .smile { height: 300px; width: 100%; }
-    .contact .smile img { right: 0; }
-    .contact .smile .rays { right: 6%; }
-    .foot { justify-content: center; text-align: center; }
+    .contact-grid { grid-template-columns: 1fr; gap: 28px; }
+    .contact .copy, .contact .side { padding-bottom: 0; }
+    .contact .side { order: 2; }
+    .contact .smile { order: 3; height: 320px; width: 100%; margin-top: 12px; }
+    .contact .smile .note { right: 2%; top: 4%; }
   }
 </style>
 </head>
@@ -686,35 +696,32 @@
   </section>
 
   <!-- Contact + footer -->
-  <section class="contact band blue on-blue reveal" id="contact">
-    <div class="wrap">
-      <div class="contact-grid">
-        <div class="copy">
-          <p class="eyebrow">Let's Talk</p>
-          <h2 class="display h2">If you're working on something interesting, I advise and angel invest in a <em>handful of founders.</em></h2>
-          <a class="pill light" href="mailto:busickleslie@gmail.com"><span>Contact me</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
-          <div class="social" aria-label="Elsewhere">
-            <a href="https://www.linkedin.com/in/lesliebusick/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
-            <a href="https://www.instagram.com/leslie_the_3rd" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.4"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg></a>
-            <a href="https://x.com/leslie_the_3rd" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.67l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z"/></svg></a>
-            <a href="https://lesliethethird.substack.com" target="_blank" rel="noopener" aria-label="Substack"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 5.5H1.46V3h21.08v2.5zm0 4.44H1.46v2.5h21.08v-2.5zM1.46 14.38V21l10.54-5.9L22.54 21v-6.62H1.46z"/></svg></a>
-            <a href="https://github.com/leslie-lauren" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.72.09-.72 1.2.08 1.84 1.23 1.84 1.23 1.07 1.84 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3z"/></svg></a>
-          </div>
-        </div>
-        <div class="smile">
-          <span class="rays" aria-hidden="true"><svg viewBox="0 0 60 120" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 46 54 6"/><path d="M8 66h48"/><path d="M6 86l48 30"/></svg></span>
-          <picture>
-            <source srcset="images/leslie-smile.webp" type="image/webp">
-            <img src="images/leslie-smile.png" alt="Leslie Busick laughing" width="586" height="1000" loading="lazy">
-          </picture>
-        </div>
+  <section class="contact band butter reveal" id="contact">
+    <div class="wrap contact-grid">
+      <div class="copy">
+        <h2 class="display talk">Let's <span class="ul">talk!<svg viewBox="0 0 200 22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true" preserveAspectRatio="none"><path d="M4 12c50-6 100-8 192-6"/><path d="M40 18c40-3 80-4 130-3"/></svg></span></h2>
+        <p class="blurb">If you're working on something interesting, I advise and angel invest in a handful of founders. So please reach out if you want to connect!</p>
+        <a class="pill explore" href="mailto:busickleslie@gmail.com"><span>Get in touch</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
       </div>
-      <footer class="foot">
-        <div>© 2026 Leslie Busick · Made in NYC</div>
-        <div class="motto">Ideas. People. A brighter tomorrow.</div>
-      </footer>
+      <div class="smile">
+        <picture>
+          <source srcset="images/leslie-smile.webp" type="image/webp">
+          <img src="images/leslie-smile.png" alt="Leslie Busick laughing" width="586" height="1000" loading="lazy">
+        </picture>
+        <span class="note" aria-hidden="true">Big ideas<br>brighter<br>tomorrows.<svg viewBox="0 0 40 36" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 32S4 22 4 12a8 8 0 0 1 16-2 8 8 0 0 1 16 2c0 10-16 20-16 20z"/></svg></span>
+      </div>
+      <div class="side">
+        <div class="brand2">Leslie Busick</div>
+        <div class="social" aria-label="Elsewhere">
+          <a href="https://www.linkedin.com/in/lesliebusick/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+          <a href="https://www.instagram.com/leslie_the_3rd" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.4"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://x.com/leslie_the_3rd" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.67l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z"/></svg></a>
+          <a href="mailto:busickleslie@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="M3 6l9 7 9-7"/></svg></a>
+        </div>
+        <hr class="side-rule">
+        <div class="motto">Ideas. Companies. People.<br>A brighter tomorrow.</div>
+      </div>
     </div>
-    <span class="sparkle s1" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M16 2v28M2 16h28M7 7l18 18M25 7L7 25"/></svg></span>
   </section>
 
 </main>
@@ -722,6 +729,7 @@
 <script>
 (() => {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (new URLSearchParams(location.search).has('static')) { document.documentElement.classList.add('static'); document.querySelectorAll('.reveal').forEach(el => el.classList.add('in')); }
 
   // Split the name into letters for the intro stagger
   const name = document.getElementById('name');

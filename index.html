@@ -217,6 +217,7 @@
   /* ---------- Cards (shared) ---------- */
   .cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: stretch; }
   .cards3 .card > p:not(.role) { flex: 1; }
+  .cards3 .card .role { min-height: calc(3 * 1.55em + 10px); }
   .card {
     background: var(--paper); color: var(--ink); border-radius: var(--radius);
     padding: 28px 26px 26px; display: flex; flex-direction: column; gap: 12px;

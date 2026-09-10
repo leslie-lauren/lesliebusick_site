@@ -206,6 +206,8 @@
   .timeline { position: relative; }
   .entry { display: grid; grid-template-columns: 96px 20px 1fr; gap: 0 12px; padding-block: 8px 34px; position: relative; }
   .entry .years { font-size: 12px; font-weight: 600; letter-spacing: .06em; color: var(--ink-mute); padding-top: 9px; font-variant-numeric: tabular-nums; }
+  /* A month+year range is too wide for the column: break between the two dates, never inside one. */
+  .entry .years span { white-space: nowrap; }
   .entry .dotcol { position: relative; }
   .entry .dotcol::before { content: ""; position: absolute; left: 9px; top: 12px; bottom: -8px; width: 1.5px; background: var(--cobalt); opacity: .35; transform-origin: top; transform: scaleY(0); transition: transform .9s cubic-bezier(.2,.7,.2,1); }
   .in .entry .dotcol::before { transform: scaleY(1); }
@@ -517,7 +519,7 @@
       </div>
       <div class="timeline reveal">
         <div class="entry">
-          <div class="years">2024 – 2026</div>
+          <div class="years"><span>Jan 2024 –</span> <span>Jan 2026</span></div>
           <div class="dotcol"><div class="dot"></div></div>
           <div>
             <h3 class="display h3">Camu</h3>
@@ -532,7 +534,7 @@
           </div>
         </div>
         <div class="entry">
-          <div class="years">2020 – 2023</div>
+          <div class="years"><span>Jun 2020 –</span> <span>Nov 2023</span></div>
           <div class="dotcol"><div class="dot"></div></div>
           <div>
             <h3 class="display h3">Odela Health</h3>

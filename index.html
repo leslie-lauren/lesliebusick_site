@@ -97,6 +97,8 @@
   .h2 { font-size: clamp(38px, 5vw, 60px); }
   .h3 { font-size: clamp(26px, 3vw, 34px); }
   .h2 em { font-style: italic; color: var(--cobalt); }
+  .swipe-hint { display: none; font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute); margin-top: 6px; }
+  .on-blue .swipe-hint { color: var(--on-blue-soft); }
   .sub { font-family: var(--display); font-style: italic; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.2; color: var(--ink-soft); margin-top: 14px; max-width: 58ch; text-wrap: pretty; }
   .on-blue .sub { color: var(--on-blue-soft); }
   .on-blue .h2 em { color: var(--butter); }
@@ -232,6 +234,14 @@
   }
   .tilt { transition: transform .12s ease-out, box-shadow .25s ease; }
   .tilt:hover { box-shadow: 0 24px 50px -26px rgba(20, 22, 31, .5); }
+  @media (hover: none) {
+    .card:active, .pcard:active { transform: scale(.98); }
+    .pcard:active .pi { transform: translateY(-3px) rotate(-6deg) scale(1.06); }
+    .essay:active .t { background-size: 100% 58%; }
+    .cover:active .comp { transform: rotateY(-28deg); }
+    .pill:active::before { transform: scaleX(1); }
+    .pill:active { color: var(--butter); }
+  }
   .card .icon { width: 44px; height: 44px; color: var(--cobalt); margin-bottom: 8px; transition: transform .35s cubic-bezier(.3,1.5,.5,1); }
   .card:hover .icon { transform: rotate(-8deg) scale(1.08); }
   .card .icon svg { width: 100%; height: 100%; }
@@ -380,6 +390,7 @@
     .hero-copy { order: 2; padding-left: var(--gutter); padding-right: var(--gutter); padding-block: 8px 52px; }
     .name { font-size: clamp(64px, 20vw, 110px); }
     .hero .sparkle.s1 { left: 6%; top: 6%; }
+    .hero .sparkle.s2 { left: auto; right: 5%; bottom: auto; top: calc(92vw * 0.911 - 44px); width: 22px; height: 22px; }
     .about .grid { grid-template-columns: 1fr; }
     .about .head { position: static; }
     .stats .wrap { grid-template-columns: repeat(2, 1fr); }
@@ -389,20 +400,29 @@
     .entry { grid-template-columns: 20px 1fr; }
     .entry .years { grid-column: 2; order: -1; padding-top: 0; margin-bottom: 4px; }
     .entry .dotcol { grid-row: span 2; }
-    .cards3, .cards6, .offline .cards4 { grid-template-columns: 1fr; }
+    .invest, .projects, .offline { padding-block: 44px; }
+    .invest .sub, .projects .sub, .offline .h2 { margin-bottom: 22px; }
+    .cards3, .cards6, .offline .cards4 { display: flex; grid-template-columns: none; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; margin-inline: calc(-1 * var(--gutter)); padding: 4px var(--gutter) 14px; scrollbar-width: none; }
+    .cards3::-webkit-scrollbar, .cards6::-webkit-scrollbar, .offline .cards4::-webkit-scrollbar { display: none; }
+    .cards3 .card, .cards6 .pcard, .offline .cards4 .card { flex: 0 0 min(78vw, 300px); scroll-snap-align: start; }
+    .cards3 .card { padding: 22px 20px 20px; gap: 8px; } .cards3 .card .icon { width: 34px; height: 34px; margin-bottom: 2px; } .cards3 .card .h3 { font-size: 22px; } .cards3 .card p { font-size: 13.5px; } .cards3 .card .role { min-height: 0; }
+    .cards6 .pcard { padding: 20px 18px 18px; grid-template-columns: 44px 1fr; } .cards6 .pcard .pi { width: 44px; height: 44px; } .cards6 .pcard .h3 { font-size: 22px; } .cards6 .pcard p { font-size: 13.5px; margin-top: 6px; } .cards6 .pcard .cta { margin-top: 8px; }
+    .offline .cards4 .card { padding: 20px 18px; } .offline .cards4 .card .h3 { font-size: 22px; } .offline .cards4 .card p { font-size: 13.5px; }
+    .swipe-hint { display: block; }
     .page { padding: 40px 22px 32px 84px; }
     .essay .t { font-size: 26px; }
-    .fmock { aspect-ratio: auto; padding: 48px var(--gutter) 0; display: grid; gap: 22px; }
+    .fmock { aspect-ratio: auto; padding: 40px var(--gutter) 44px; display: grid; gap: 22px; }
+    .blurb br { display: none; }
     .fmock > * { position: static; }
     .talk { font-size: 64px; white-space: normal; }
     .blurb { font-size: 16px; line-height: 1.5; white-space: normal; }
     .fpill { height: auto; padding: 14px 26px; font-size: 12px; gap: 12px; justify-self: start; }
     .fpill svg { width: 16px; height: 16px; }
-    .side { width: 100%; }
+    .side { width: 100%; order: 3; }
     .brand2 { font-size: 13px; margin-bottom: 18px; }
     .social { gap: 26px; } .social a { width: 22px; height: 22px; }
     .side-rule { margin: 26px 0 18px; } .motto { font-size: 11px; line-height: 2; }
-    .fphoto { width: 82%; height: 340px; margin: 8px auto 0; order: 9; }
+    .fphoto { width: 78%; height: 300px; margin: 6px auto 0; order: 2; }
   }
 </style>
 </head>
@@ -609,6 +629,7 @@
           <span class="cta">Request access <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
         </a>
       </div>
+      <p class="swipe-hint">Swipe →</p>
     </div>
   </section>
 
@@ -665,11 +686,8 @@
             <span class="t">How We Grew from 0 → $2M in 6 Months</span>
             <span class="m">Read on Substack</span>
           </a>
-          <div class="essay soon">
-            <span class="t">The Space Between: 6 Predictions on Where AI Goes from Here</span>
-            <span class="m">Coming soon</span>
-          </div>
         </div>
+      <p class="swipe-hint">Swipe →</p>
       </div>
     </div>
   </section>
@@ -697,6 +715,7 @@
           <p>Certified kook.</p>
         </article>
       </div>
+      <p class="swipe-hint">Swipe →</p>
     </div>
   </section>
 
